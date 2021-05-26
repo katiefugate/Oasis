@@ -21,7 +21,7 @@ app.use(json);
 
 app.use(staticMiddleware);
 
-app.post('/oasis/hosts', uploadsMiddleware, (req, res, next) => {
+app.post('/api/hosts', uploadsMiddleware, (req, res, next) => {
   const name = req.body.name;
   const location = req.body.location;
   const price = parseInt(req.body.price, 10);
@@ -32,8 +32,8 @@ app.post('/oasis/hosts', uploadsMiddleware, (req, res, next) => {
   if (!Number.isInteger(price) || Math.sign(price) !== 1) {
     throw new ClientError(400, 'price must be a positive integer');
   }
-  if (!name || !location || !price || !description || !rules || !amenities || !url) {
-    throw new ClientError(400, 'name, location, price, description, rules, amenities, and image are required fields!');
+  if (!name || !location || !price || !description || !rules || !amenities) {
+    throw new ClientError(400, 'name, location, price, description, rules, and amenities are required fields!');
   }
   const sql1 = `
     insert into "hosts"("name", "hostId", "poolId")
