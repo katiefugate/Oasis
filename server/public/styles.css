@@ -1,5 +1,7 @@
 label,
-.host-form-title {
+.host-form-title,
+.host-button,
+.swimmer-button {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -50,4 +52,37 @@ textarea {
 
 .host-submit-button:hover {
   cursor: pointer;
+}
+
+.user-buttons-container {
+  background-color: rgba(43, 103, 129, 1);
+}
+
+.host-button,
+.swimmer-button {
+  width: 8rem;
+  margin: 3rem;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.search-input {
+  background-color: rgb(190, 190, 190);
+  border: 1px solid rgb(124, 124, 124);
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.search-label {
+  margin: 1rem 0;
+}
+
+.search-button {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  font-size: 1rem;
 }
