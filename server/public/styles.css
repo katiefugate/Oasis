@@ -1,11 +1,15 @@
 label,
 .host-form-title,
 .host-button,
-.swimmer-button {
+.swimmer-button,
+.pool-list-price,
+.pool-list-location,
+.search-link {
   font-family: 'Montserrat', sans-serif;
 }
 
-.header {
+.header,
+.header-home {
   background-color: rgba(43, 103, 129, 1);
   padding: 0.5px;
   text-align: center;
@@ -50,10 +54,6 @@ textarea {
   font-size: 1.25rem;
 }
 
-.host-submit-button:hover {
-  cursor: pointer;
-}
-
 .user-buttons-container {
   background-color: rgba(43, 103, 129, 1);
 }
@@ -85,4 +85,40 @@ textarea {
   margin: 1rem 0;
   padding: 0.5rem 0;
   font-size: 1rem;
+}
+
+.navbar {
+  background-color: rgba(43, 103, 129, 1);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.search-icon {
+  color: white;
+  font-size: 4rem;
+  margin: 0.75rem 0;
+  margin-left: 1rem;
+}
+
+.pool-list-img {
+  width: 100%;
+}
+
+.list-pool {
+  flex-basis: 25%;
+}
+
+.search-link {
+  text-decoration: none;
+  color: white;
+}
+
+.host-submit-button:hover,
+.search-link:hover,
+.swimmer-button:hover,
+.host-button:hover,
+.search-icon:hover,
+.search-button:hover {
+  cursor: pointer;
 }

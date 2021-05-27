@@ -31,7 +31,6 @@ form {
 }
 
 .search-container {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -44,6 +43,30 @@ form {
 
 .search-input {
   width: 90%;
+}
+
+.list-pool {
+  flex-basis: 100%;
+}
+
+.pool-list-container {
+  padding: 0 2rem;
+  padding-bottom: 6.5rem;
+}
+
+.pool-list-img {
+  width: 10rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+.pool-list-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desktop-links {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -89,5 +112,38 @@ form {
 
   .search-input {
     width: 50%;
+  }
+
+  .pool-list-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .pool-list-img {
+    width: 100%;
+  }
+
+  .list-pool {
+    flex-basis: 25%;
+    padding: 0 0.75rem;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .desktop-links {
+    display: block;
+    align-self: center;
+    padding: 0 1rem;
+  }
+
+  .header-title {
+    padding: 0 1rem;
   }
 }

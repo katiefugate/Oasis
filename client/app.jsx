@@ -4,6 +4,8 @@ import Header from './components/header';
 import HostForm from './pages/host-form';
 import parseRoute from './lib/parse-route';
 import Search from './pages/search-page';
+import Navbar from './components/navbar';
+import SearchResults from './pages/search-results';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,20 +29,38 @@ export default class App extends React.Component {
       return <Home />;
     }
     if (path === 'host/form') {
-      return < HostForm />;
+      return (
+        <>
+      < Header />
+      < HostForm />
+      </>
+      );
     }
     if (path === 'search') {
-      return < Search />;
+      return (
+      <>
+      < Header />
+      < Search />
+      < Navbar />
+      </>
+      );
+    }
+    if (path === 'search-results') {
+      return (
+        <>
+        < Header />
+        < SearchResults />
+        < Navbar />
+        </>
+      );
     }
   }
 
   render() {
     return (
       <>
-      < Header />
       {this.renderPage()}
-
-    </>
+      </>
     );
   }
 }
