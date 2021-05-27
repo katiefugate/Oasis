@@ -71,9 +71,6 @@ app.get('/api/pools/:location', (req, res, next) => {
   const params = [location];
   db.query(sql, params)
     .then(result => {
-      if (!result.rows[0]) {
-        throw new ClientError(400, `No pools found in ${location}`);
-      }
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));

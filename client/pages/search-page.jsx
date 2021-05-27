@@ -1,18 +1,20 @@
 import React from 'react';
-import parseRoute from '../lib/parse-route';
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      route: parseRoute(window.location.hash)
-    };
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { location: '' };
+  }
+
+  handleChange(event) {
+    this.setState({ location: event.target.value });
   }
 
   handleClick(event) {
     event.preventDefault();
-    const location = event.target.search.value;
+    const location = this.state.location;
     window.location.hash = `#search-results?&location=${location}`;
     event.target.reset();
   }
@@ -21,7 +23,7 @@ class Search extends React.Component {
     return (
      <form onSubmit={this.handleClick} className='search-container'>
         <label className='search-label' htmlFor='search'>Where do you want to swim?</label>
-        <input name='search' className='search-input' type='text'></input>
+        <input onChange={this.handleChange} name='search' className='search-input' type='text'></input>
         <button type='submit' className='search-button'>Search</button>
       </form>
     );

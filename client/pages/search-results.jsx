@@ -1,27 +1,25 @@
 import React from 'react';
-import parseRoute from '../lib/parse-route';
 
 class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.renderPoolList = this.renderPoolList.bind(this);
+    this.poolsExist = this.poolsExist.bind(this);
     this.state = {
-      route: parseRoute(window.location.hash),
+      location: this.props.location,
       poolList: null,
       isLoading: true
     };
   }
 
   componentDidMount() {
-    const { params } = this.state.route;
-    const location = params.get('location');
+    const location = this.state.location;
     fetch(`/api/pools/${location}`)
       .then(res => res.json())
       .then(body => {
         this.setState({
           poolList: body,
-          isLoading: false,
-          location: location
+          isLoading: false
         });
       });
   }
@@ -41,18 +39,24 @@ class SearchResults extends React.Component {
     return poolList;
   }
 
-  render() {
+  poolsExist() {
+    if (!this.state.poolList[0]) {
+      return <h1 className='no-pools'>There are currently no pools in {this.state.location}!</h1>;
+    }
+    return (
+      <div>
+        <h1 className='search-result-header'>Pools in {this.state.location}</h1>
+        <div className='pool-list-container'>
+          {this.renderPoolList()}
+        </div>
+      </div>
+    );
+  }
 
+  render() {
     return this.state.isLoading
       ? <p>Loading...</p>
-      : (
-        <div>
-          <h1 className='search-result-header'>Pools in {this.state.location}</h1>
-          <div className='pool-list-container'>
-            {this.renderPoolList()}
-          </div>
-        </div>
-        );
+      : this.poolsExist();
   }
 
 }

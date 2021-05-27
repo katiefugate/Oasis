@@ -5,7 +5,8 @@ label,
 .pool-list-price,
 .pool-list-location,
 .search-link,
-.search-result-header {
+.search-result-header,
+.no-pools {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -125,5 +126,10 @@ textarea {
 }
 
 .search-result-header {
+  text-align: center;
+}
+
+.no-pools {
+  padding-top: 2rem;
   text-align: center;
 }

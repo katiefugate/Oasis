@@ -25,6 +25,8 @@ export default class App extends React.Component {
 
   renderPage() {
     const { path } = this.state.route;
+    const { params } = this.state.route;
+    const location = params.get('location');
     if (path === '') {
       return <Home />;
     }
@@ -49,7 +51,7 @@ export default class App extends React.Component {
       return (
         <>
         < Header />
-        < SearchResults />
+        < SearchResults location={location} />
         < Navbar />
         </>
       );
