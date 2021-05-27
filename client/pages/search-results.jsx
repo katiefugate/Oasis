@@ -20,7 +20,8 @@ class SearchResults extends React.Component {
       .then(body => {
         this.setState({
           poolList: body,
-          isLoading: false
+          isLoading: false,
+          location: location
         });
       });
   }
@@ -41,12 +42,16 @@ class SearchResults extends React.Component {
   }
 
   render() {
+
     return this.state.isLoading
       ? <p>Loading...</p>
       : (
-      <div className='pool-list-container'>
-        {this.renderPoolList()}
-      </div>
+        <div>
+          <h1 className='search-result-header'>Pools in {this.state.location}</h1>
+          <div className='pool-list-container'>
+            {this.renderPoolList()}
+          </div>
+        </div>
         );
   }
 

@@ -4,7 +4,8 @@ label,
 .swimmer-button,
 .pool-list-price,
 .pool-list-location,
-.search-link {
+.search-link,
+.search-result-header {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -121,4 +122,8 @@ textarea {
 .search-icon:hover,
 .search-button:hover {
   cursor: pointer;
+}
+
+.search-result-header {
+  text-align: center;
 }
