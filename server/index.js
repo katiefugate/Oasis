@@ -59,6 +59,23 @@ app.post('/api/hosts', uploadsMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/pools/:location', (req, res, next) => {
+  const location = req.params.location;
+  const sql = `
+    select "location",
+           "price",
+           "image",
+           "poolId"
+      from "pools"
+    where "location" = $1`;
+  const params = [location];
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

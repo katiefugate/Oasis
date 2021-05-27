@@ -1,9 +1,17 @@
 label,
-.host-form-title {
+.host-form-title,
+.host-button,
+.swimmer-button,
+.pool-list-price,
+.pool-list-location,
+.search-link,
+.search-result-header,
+.no-pools {
   font-family: 'Montserrat', sans-serif;
 }
 
-.header {
+.header,
+.header-home {
   background-color: rgba(43, 103, 129, 1);
   padding: 0.5px;
   text-align: center;
@@ -48,6 +56,80 @@ textarea {
   font-size: 1.25rem;
 }
 
-.host-submit-button:hover {
+.user-buttons-container {
+  background-color: rgba(43, 103, 129, 1);
+}
+
+.host-button,
+.swimmer-button {
+  width: 8rem;
+  margin: 3rem;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.search-input {
+  background-color: rgb(190, 190, 190);
+  border: 1px solid rgb(124, 124, 124);
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.search-label {
+  margin: 1rem 0;
+}
+
+.search-button {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.navbar {
+  background-color: rgba(43, 103, 129, 1);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.search-icon {
+  color: white;
+  font-size: 4rem;
+  margin: 0.75rem 0;
+  margin-left: 1rem;
+}
+
+.pool-list-img {
+  width: 100%;
+}
+
+.list-pool {
+  flex-basis: 25%;
+}
+
+.search-link {
+  text-decoration: none;
+  color: white;
+}
+
+.host-submit-button:hover,
+.search-link:hover,
+.swimmer-button:hover,
+.host-button:hover,
+.search-icon:hover,
+.search-button:hover {
   cursor: pointer;
+}
+
+.search-result-header {
+  text-align: center;
+}
+
+.no-pools {
+  padding-top: 2rem;
+  text-align: center;
 }

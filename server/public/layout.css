@@ -18,6 +18,57 @@ form {
   flex-direction: column;
 }
 
+.user-buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+}
+
+.host-link,
+.swimmer-link {
+  align-self: center;
+}
+
+.search-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.search-button {
+  width: 8rem;
+}
+
+.search-input {
+  width: 90%;
+}
+
+.list-pool {
+  flex-basis: 100%;
+}
+
+.pool-list-container {
+  padding: 0 2rem;
+  padding-bottom: 6.5rem;
+}
+
+.pool-list-img {
+  width: 10rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+.pool-list-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.desktop-links {
+  display: none;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
@@ -53,5 +104,46 @@ form {
     display: block;
     width: 100%;
     text-align: center;
+  }
+
+  .search-button {
+    width: 10rem;
+  }
+
+  .search-input {
+    width: 50%;
+  }
+
+  .pool-list-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .pool-list-img {
+    width: 100%;
+  }
+
+  .list-pool {
+    flex-basis: 25%;
+    padding: 0 0.75rem;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .desktop-links {
+    display: block;
+    align-self: center;
+    padding: 0 1rem;
+  }
+
+  .header-title {
+    padding: 0 1rem;
   }
 }
