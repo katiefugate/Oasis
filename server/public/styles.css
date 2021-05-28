@@ -109,6 +109,8 @@ textarea {
 
 .list-pool {
   flex-basis: 25%;
+  text-decoration: none;
+  color: black;
 }
 
 .search-link {
