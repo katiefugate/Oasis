@@ -26,3 +26,15 @@ create table "public"."pools" (
   "hostId"      serial,
   primary key ("poolId")
 );
+
+create table "public"."bookingRequests" (
+  "swimmerId"     serial,
+  "hostId"        serial,
+  "poolId"        serial,
+  "date"          text    not null,
+  "startTime"     text    not null,
+  "endTime"       text    not null,
+  "status"        text    not null,
+  "bookingId"     serial,
+  primary key ("bookingId")
+);
