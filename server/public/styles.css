@@ -6,8 +6,15 @@ label,
 .pool-list-location,
 .search-link,
 .search-result-header,
-.no-pools {
+.no-pools,
+.pool-info-span,
+.info-titles,
+.pool-info-location {
   font-family: 'Montserrat', sans-serif;
+}
+
+.info-p {
+  font-family: 'Short Stack', cursive;
 }
 
 .header,
@@ -123,7 +130,8 @@ textarea {
 .swimmer-button:hover,
 .host-button:hover,
 .search-icon:hover,
-.search-button:hover {
+.search-button:hover,
+.pool-list-img:hover {
   cursor: pointer;
 }
 
@@ -134,4 +142,8 @@ textarea {
 .no-pools {
   padding-top: 2rem;
   text-align: center;
+}
+
+.pool-info-location {
+  font-size: 1.5rem;
 }

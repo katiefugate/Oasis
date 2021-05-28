@@ -5,7 +5,6 @@ class SearchResults extends React.Component {
     super(props);
     this.renderPoolList = this.renderPoolList.bind(this);
     this.poolsExist = this.poolsExist.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
       location: this.props.location,
       poolList: null,
