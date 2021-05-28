@@ -27,13 +27,13 @@ class SearchResults extends React.Component {
   renderPoolList() {
     const poolList = this.state.poolList.map(pool => {
       return (
-        <div className='list-pool' key={pool.poolId}>
-          <img className='pool-list-img' src={pool.image}></img>
+        <a href={`#pool?poolId=${pool.poolId}`} className='list-pool' key={pool.poolId}>
+          <img id={pool.poolId} className='pool-list-img' src={pool.image}></img>
           <div className='pool-list-info'>
             <span className='pool-list-location'>{pool.location}</span>
             <span className='pool-list-price'>{`$${pool.price}/hr`}</span>
           </div>
-        </div>
+        </a>
       );
     });
     return poolList;

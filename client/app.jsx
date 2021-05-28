@@ -6,6 +6,7 @@ import parseRoute from './lib/parse-route';
 import Search from './pages/search-page';
 import Navbar from './components/navbar';
 import SearchResults from './pages/search-results';
+import PoolInfo from './pages/pool-info';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class App extends React.Component {
     const { path } = this.state.route;
     const { params } = this.state.route;
     const location = params.get('location');
+    const poolId = params.get('poolId');
     if (path === '') {
       return <Home />;
     }
@@ -52,6 +54,15 @@ export default class App extends React.Component {
         <>
         < Header />
         < SearchResults location={location} />
+        < Navbar />
+        </>
+      );
+    }
+    if (path === 'pool') {
+      return (
+        <>
+        < Header />
+        < PoolInfo poolId={poolId}/>
         < Navbar />
         </>
       );

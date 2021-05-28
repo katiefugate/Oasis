@@ -76,6 +76,35 @@ app.get('/api/pools/:location', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/pool/:poolId', (req, res, next) => {
+  const poolId = parseInt(req.params.poolId, 10);
+  if (!Number.isInteger(poolId) || Math.sign(poolId) !== 1) {
+    throw new ClientError(400, 'poolId must be a positive integer');
+  }
+  const sql = `
+    select "pools"."poolId",
+           "pools"."location",
+           "pools"."price",
+           "pools"."description",
+           "pools"."rules",
+           "pools"."amenities",
+           "pools"."image",
+           "pools"."hostId",
+           "hosts"."name"
+      from "pools"
+      join "hosts" using ("poolId")
+      where "poolId" = $1`;
+  const params = [poolId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `Pool with poolId of ${poolId} was not found`);
+      }
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
