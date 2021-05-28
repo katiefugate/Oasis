@@ -5,13 +5,12 @@ class PoolInfo extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
-      poolId: this.props.poolId,
       info: null
     };
   }
 
   componentDidMount() {
-    fetch(`api/pool/${this.state.poolId}`)
+    fetch(`api/pool/${this.props.poolId}`)
       .then(res => res.json())
       .then(body => {
         this.setState({
