@@ -100,7 +100,7 @@ app.get('/api/pool/:poolId', (req, res, next) => {
       if (!result.rows[0]) {
         throw new ClientError(404, `Pool with poolId of ${poolId} was not found`);
       }
-      res.status(200).json(result.rows);
+      res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));
 });

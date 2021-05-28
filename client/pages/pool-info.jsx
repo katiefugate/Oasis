@@ -15,7 +15,7 @@ class PoolInfo extends React.Component {
       .then(res => res.json())
       .then(body => {
         this.setState({
-          info: body[0],
+          info: body,
           isLoading: false
         });
       });
