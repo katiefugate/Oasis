@@ -125,16 +125,6 @@ textarea {
   color: white;
 }
 
-.host-submit-button:hover,
-.search-link:hover,
-.swimmer-button:hover,
-.host-button:hover,
-.search-icon:hover,
-.search-button:hover,
-.pool-list-img:hover {
-  cursor: pointer;
-}
-
 .search-result-header {
   text-align: center;
 }
@@ -146,4 +136,46 @@ textarea {
 
 .pool-info-location {
   font-size: 1.5rem;
+}
+
+.book-button {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.466);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.booking-submit {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.booking-cancel {
+  background-color: black;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.host-submit-button:hover,
+.search-link:hover,
+.swimmer-button:hover,
+.host-button:hover,
+.search-icon:hover,
+.search-button:hover,
+.pool-list-img:hover,
+button {
+  cursor: pointer;
+}
+
+button {
+  border: none;
 }

@@ -14,6 +14,12 @@ create table "public"."hosts" (
   primary key ("hostId")
 );
 
+create table "public"."swimmers" (
+  "swimmerId"   serial,
+  name          text    not null,
+  primary key ("swimmerId")
+);
+
 
 create table "public"."pools" (
   "poolId"      serial,
@@ -25,4 +31,15 @@ create table "public"."pools" (
   "image"       text     not null,
   "hostId"      serial,
   primary key ("poolId")
+);
+
+create table "public"."bookingRequests" (
+  "swimmerId"     serial,
+  "poolId"        serial,
+  "date"          text   not null,
+  "startTime"     text    not null,
+  "endTime"       text    not null,
+  "status"        text    not null,
+  "bookingId"     serial,
+  primary key ("bookingId")
 );

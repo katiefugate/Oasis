@@ -1,3 +1,7 @@
+.hidden {
+  display: none;
+}
+
 .host-form-container {
   padding-top: 3rem;
 }
@@ -103,6 +107,54 @@ form {
   margin-bottom: 1rem;
 }
 
+.location-book-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.book-button {
+  margin-top: 0.8rem;
+  height: 2rem;
+  align-self: center;
+}
+
+.modal {
+  position: fixed;
+  background-color: white;
+  border: 2px solid black;
+  padding: 2rem 2rem;
+  width: 90%;
+  top: 30%;
+  border-radius: 0.5rem;
+}
+
+.swimmer-login {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding-top: 5rem;
+}
+
+.booking-submit,
+.booking-cancel {
+  width: 40%;
+  align-self: center;
+  height: 2rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+.booking-input {
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  height: 2.5rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
@@ -186,6 +238,9 @@ form {
     flex-direction: row;
     padding: 0 2rem;
     justify-content: space-evenly;
+    position: relative;
+    height: 100vh;
+    margin-bottom: 0;
   }
 
   .info-col {
@@ -203,5 +258,19 @@ form {
 
   .info-titles {
     font-size: 1.5rem;
+  }
+
+  .book-button {
+    height: 2.5rem;
+    width: 7rem;
+  }
+
+  .swimmer-name {
+    width: 50%;
+  }
+
+  .booking-form {
+    display: flex;
+    flex-direction: column;
   }
 }
