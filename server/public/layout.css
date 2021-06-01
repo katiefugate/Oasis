@@ -125,7 +125,7 @@ form {
   border: 2px solid black;
   padding: 2rem 2rem;
   width: 90%;
-  top: 35%;
+  top: 30%;
   border-radius: 0.5rem;
 }
 
@@ -147,6 +147,12 @@ form {
   display: flex;
   justify-content: space-between;
   padding-top: 2rem;
+}
+
+.booking-input {
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  height: 2.5rem;
 }
 
 @media screen and (min-width: 768px) {

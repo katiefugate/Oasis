@@ -65,11 +65,11 @@ class PoolInfo extends React.Component {
           <div className={this.state.modalClass}>
             <form className='booking-form' onSubmit={this.handleSubmit}>
               <label htmlFor='date'>Date</label>
-              <input type='date' name='date'></input>
+              <input className='booking-input' type='date' name='date'></input>
               <label htmlFor='start-time'>Start Time</label>
-              <input type='time' name='startTime'></input>
+              <input className='booking-input' type='time' name='startTime'></input>
               <label htmlFor='end-time'>End Time</label>
-              <input type='time' name='endTime'></input>
+              <input className='booking-input' type='time' name='endTime'></input>
               <div className='buttons-container'>
               <button className='booking-submit' type='submit'>BOOK</button>
               <button className='booking-cancel' type='reset' onClick={this.handleCancel}>CANCEL</button>
