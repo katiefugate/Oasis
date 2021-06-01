@@ -36,6 +36,7 @@ create table "public"."pools" (
 create table "public"."bookingRequests" (
   "swimmerId"     serial,
   "poolId"        serial,
+  "hostId"        serial,
   "date"          text   not null,
   "startTime"     text    not null,
   "endTime"       text    not null,

@@ -110,14 +110,26 @@ app.post('/api/book', (req, res, next) => {
   if (!swimmerId || !poolId || !date || !startTime || !endTime) {
     throw new ClientError(400, 'swimmerId, hostId, poolId, date, startTime, and endTime are required fields!');
   }
-  const sql = `
-    insert into "bookingRequests"("swimmerId", "poolId", "date", "startTime", "endTime", "status")
-                          values ($1, $2, $3, $4, $5, 'pending')
-    returning *`;
-  const params = [swimmerId, poolId, date, startTime, endTime];
-  db.query(sql, params)
+  const sql1 = `
+  select "pools"."poolId",
+         "hosts"."hostId"
+    from "pools"
+    join "hosts" using ("poolId")
+    where "poolId" = $1`;
+  const params1 = [poolId];
+  db.query(sql1, params1)
     .then(result => {
-      res.status(201).json(result.rows[0]);
+      const hostId = result.rows[0].hostId;
+      const params2 = [swimmerId, poolId, hostId, date, startTime, endTime];
+      const sql2 = `
+      insert into "bookingRequests"("swimmerId", "poolId", "hostId", "date", "startTime", "endTime", "status")
+                            values ($1, $2, $3, $4, $5, $6, 'pending')
+      returning *`;
+      db.query(sql2, params2)
+        .then(result => {
+          res.status(201).json(result.rows[0]);
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
@@ -134,7 +146,28 @@ app.post('/api/swimmer', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       res.status(201).json(result.rows[0]);
-    });
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
+  const hostId = req.params.hostId;
+
+  const sql = `
+  select "swimmers"."name",
+         "bookingRequests"."date",
+         "bookingRequests"."startTime",
+         "bookingRequests"."endTime"
+    from "bookingRequests"
+    join "swimmers" using ("swimmerId")
+   where "hostId" = $1`;
+  const params = [hostId];
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);
