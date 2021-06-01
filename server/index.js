@@ -105,6 +105,38 @@ app.get('/api/pool/:poolId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/book', (req, res, next) => {
+  const { swimmerId, poolId, date, startTime, endTime } = req.body;
+  if (!swimmerId || !poolId || !date || !startTime || !endTime) {
+    throw new ClientError(400, 'swimmerId, hostId, poolId, date, startTime, and endTime are required fields!');
+  }
+  const sql = `
+    insert into "bookingRequests"("swimmerId", "poolId", "date", "startTime", "endTime", "status")
+                          values ($1, $2, $3, $4, $5, 'pending')
+    returning *`;
+  const params = [swimmerId, poolId, date, startTime, endTime];
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/swimmer', (req, res, next) => {
+  const name = req.body.name;
+
+  const sql = `
+    insert into swimmers ("name", "swimmerId")
+                  values($1 , $2)
+                  returning *`;
+  const params = [name, 1];
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

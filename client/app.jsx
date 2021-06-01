@@ -7,12 +7,16 @@ import Search from './pages/search-page';
 import Navbar from './components/navbar';
 import SearchResults from './pages/search-results';
 import PoolInfo from './pages/pool-info';
+import Swimmer from './pages/swimmer';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSwimmerSignIn = this.handleSwimmerSignIn.bind(this);
     this.state = {
-      route: parseRoute(window.location.hash)
+      route: parseRoute(window.location.hash),
+      type: null,
+      swimmerId: null
     };
   }
 
@@ -24,6 +28,14 @@ export default class App extends React.Component {
     });
   }
 
+  handleSwimmerSignIn(swimmerId, name) {
+    this.setState({
+      type: 'swimmer',
+      swimmerId,
+      name
+    });
+  }
+
   renderPage() {
     const { path } = this.state.route;
     const { params } = this.state.route;
@@ -32,7 +44,15 @@ export default class App extends React.Component {
     if (path === '') {
       return <Home />;
     }
-    if (path === 'host/form') {
+    if (path === 'swimmer') {
+      return (
+        <>
+        < Header />
+        < Swimmer onSignIn={this.handleSwimmerSignIn} />
+        </>
+      );
+    }
+    if (path === 'host-form') {
       return (
         <>
       < Header />
@@ -62,7 +82,7 @@ export default class App extends React.Component {
       return (
         <>
         < Header />
-        < PoolInfo poolId={poolId}/>
+        < PoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
         < Navbar />
         </>
       );
