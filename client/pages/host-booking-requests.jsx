@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns';
 
 class HostBookingRequests extends React.Component {
   constructor(props) {
@@ -23,36 +24,11 @@ class HostBookingRequests extends React.Component {
 
   renderBookings() {
     const bookings = this.state.bookings.map(booking => {
-      let start = `${booking.startTime[0]}${booking.startTime[1]}`;
-      let end = `${booking.endTime[0]}${booking.endTime[1]}`;
-      let startAmpm;
-      let endAmpm;
-      if (start === '12') {
-        startAmpm = 'pm';
-      } else if (start > 12) {
-        start = start - 12;
-        startAmpm = 'pm';
-      } else {
-        startAmpm = 'am';
-      }
-      if (end === '12') {
-        endAmpm = 'pm';
-      } else if (end > 12) {
-        end = end - 12;
-        endAmpm = 'pm';
-      } else {
-        endAmpm = 'am';
-      }
-      if (start[0] === '0') {
-        start = start[1];
-      }
-      if (end[0] === '0') {
-        end = end[1];
-      }
-      const dateSplit = booking.date.split('-');
-      const date = `${dateSplit[1]}-${dateSplit[2]}-${dateSplit[0]}`;
-      start = `${start}:${booking.startTime[3]}${booking.startTime[4]} ${startAmpm}`;
-      end = `${end}:${booking.endTime[3]}${booking.endTime[4]} ${endAmpm}`;
+      const startD = format(new Date(booking.date + ' ' + booking.startTime), 'MM/dd/yyyy h:mm aaa');
+      const endD = format(new Date(booking.date + ' ' + booking.endTime), 'MM/dd/yyyy h:mm aaa');
+      const date = format(new Date(booking.date), 'MM/dd/yyyy');
+      const start = startD.substring(11);
+      const end = endD.substring(11);
       return (
         <div className='booking-container' key={booking.bookingId}>
           <p className='booking-info'>{booking.name}</p>
