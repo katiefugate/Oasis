@@ -181,6 +181,26 @@ app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/host/booking-status/:bookingId', (req, res, next) => {
+  const bookingId = req.params.bookingId;
+  const status = req.body.status;
+  if (!status) {
+    throw new ClientError(400, 'status is required!');
+  }
+  const sql = `
+    update "bookingRequests"
+    set "status" = $1
+    where "bookingId" = $2
+    returning*`;
+  const params = [status, bookingId];
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
