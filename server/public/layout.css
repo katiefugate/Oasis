@@ -2,6 +2,10 @@
   display: none;
 }
 
+#root {
+  margin-bottom: 8rem;
+}
+
 .host-form-container {
   padding-top: 3rem;
 }
@@ -129,7 +133,8 @@ form {
   border-radius: 0.5rem;
 }
 
-.swimmer-login {
+.swimmer-login,
+.host-login {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -149,10 +154,31 @@ form {
   padding-top: 2rem;
 }
 
+.bookings-container {
+  margin: 0 2rem;
+}
+
+.booking-title {
+  text-align: center;
+  margin-bottom: 4rem;
+  margin-top: 3rem;
+}
+
+.booking-container {
+  margin-bottom: 3rem;
+}
+
 .booking-input {
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   height: 2.5rem;
+}
+
+.login-button {
+  margin-top: 2rem;
+  width: 30%;
+  align-self: center;
+  height: 2rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -184,6 +210,10 @@ form {
     flex-basis: 50%;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .column.price {
+    margin-top: 3rem;
   }
 
   .button-container {
@@ -265,12 +295,26 @@ form {
     width: 7rem;
   }
 
-  .swimmer-name {
+  .swimmer-name,
+  .host-name {
     width: 50%;
   }
 
   .booking-form {
     display: flex;
     flex-direction: column;
+  }
+
+  .bookings-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .booking-container {
+    flex-basis: 25%;
+  }
+
+  .login-button {
+    width: 10rem;
   }
 }

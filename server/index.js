@@ -21,40 +21,50 @@ app.use(json);
 
 app.use(staticMiddleware);
 
-app.post('/api/hosts', uploadsMiddleware, (req, res, next) => {
+app.post('/api/host', (req, res, next) => {
   const name = req.body.name;
+  const sql = `
+    insert into "hosts"("name", "hostId", "poolId")
+    values($1, $2, $3)
+    returning *`;
+  const params = [name, 1, null];
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/pools/:hostId', uploadsMiddleware, (req, res, next) => {
   const location = req.body.location;
   const price = parseInt(req.body.price, 10);
   const description = req.body.description;
   const rules = req.body.rules;
   const amenities = req.body.amenities;
+  const hostId = req.params.hostId;
   const url = '/images/' + req.file.filename;
   if (!Number.isInteger(price) || Math.sign(price) !== 1) {
     throw new ClientError(400, 'price must be a positive integer');
   }
-  if (!name || !location || !price || !description || !rules || !amenities) {
+  if (!location || !price || !description || !rules || !amenities) {
     throw new ClientError(400, 'name, location, price, description, rules, and amenities are required fields!');
   }
-  const sql1 = `
-    insert into "hosts"("name", "hostId", "poolId")
-    values($1, $2, $3)
+  const sql = `insert into "pools"("hostId", "location", "price", "description", "rules", "amenities", "image", "poolId")
+    values($1, $2, $3, $4, $5, $6, $7, $8)
     returning *`;
-  const sql2 = `insert into "pools"("location", "price", "description", "rules", "amenities", "image", "poolId")
-    values($1, $2, $3, $4, $5, $6, $7)
-    returning *`;
-  const params1 = [name, 1, 1];
-  const params2 = [location, price, description, rules, amenities, url, 1];
+  const params = [hostId, location, price, description, rules, amenities, url, 1];
 
-  db.query(sql1, params1)
+  const sql2 = `update "hosts"
+  set "poolId" = $1
+  where "hostId" = $2`;
+  const params2 = [1, hostId];
+
+  db.query(sql, params)
     .then(result => {
-      const firstResult = result.rows[0];
       db.query(sql2, params2)
-        .then(result => {
-          const secondResult = result.rows[0];
-          secondResult.name = firstResult.name;
-          res.status(201).json(secondResult);
-        })
         .catch(err => next(err));
+      res.status(201).json(result.rows[0]);
     })
     .catch(err => next(err));
 });
@@ -157,7 +167,8 @@ app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
   select "swimmers"."name",
          "bookingRequests"."date",
          "bookingRequests"."startTime",
-         "bookingRequests"."endTime"
+         "bookingRequests"."endTime",
+         "bookingRequests"."bookingId"
     from "bookingRequests"
     join "swimmers" using ("swimmerId")
    where "hostId" = $1`;

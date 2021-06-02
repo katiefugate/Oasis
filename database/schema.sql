@@ -10,7 +10,7 @@ create schema "public";
 create table "public"."hosts" (
   "hostId"    serial,
   "name"      text    not null,
-  "poolId"    serial,
+  "poolId"    integer,
   primary key ("hostId")
 );
 
@@ -29,18 +29,18 @@ create table "public"."pools" (
   "rules"       text     not null,
   "amenities"   text     not null,
   "image"       text     not null,
-  "hostId"      serial,
+  "hostId"      integer  not null,
   primary key ("poolId")
 );
 
 create table "public"."bookingRequests" (
-  "swimmerId"     serial,
-  "poolId"        serial,
-  "hostId"        serial,
-  "date"          text   not null,
+  "bookingId"     serial,
+  "swimmerId"     integer not null,
+  "poolId"        integer not null,
+  "hostId"        integer not null,
+  "date"          text    not null,
   "startTime"     text    not null,
   "endTime"       text    not null,
   "status"        text    not null,
-  "bookingId"     serial,
   primary key ("bookingId")
 );

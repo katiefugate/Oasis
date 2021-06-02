@@ -11,7 +11,7 @@ class Home extends React.Component {
           <a className='swimmer-link' href='#swimmer'>
             <button className='swimmer-button'>Swimmer</button>
           </a>
-          <a className='host-link' href='#host-form'>
+          <a className='host-link' href='#host'>
             <button className='host-button'>Host</button>
           </a>
         </div>

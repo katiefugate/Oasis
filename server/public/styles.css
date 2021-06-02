@@ -9,11 +9,14 @@ label,
 .no-pools,
 .pool-info-span,
 .info-titles,
-.pool-info-location {
+.pool-info-location,
+.booking-title,
+.booking-requests-link {
   font-family: 'Montserrat', sans-serif;
 }
 
-.info-p {
+.info-p,
+.booking-container {
   font-family: 'Short Stack', cursive;
 }
 
@@ -103,7 +106,8 @@ textarea {
   bottom: 0;
 }
 
-.search-icon {
+.search-icon,
+.host-bookings-icon {
   color: white;
   font-size: 4rem;
   margin: 0.75rem 0;
@@ -120,7 +124,8 @@ textarea {
   color: black;
 }
 
-.search-link {
+.search-link,
+.booking-requests-link {
   text-decoration: none;
   color: white;
 }
@@ -153,7 +158,8 @@ textarea {
   right: 0;
 }
 
-.booking-submit {
+.booking-submit,
+.login-button {
   background-color: rgba(43, 103, 129, 1);
   color: white;
   border-radius: 0.5rem;
