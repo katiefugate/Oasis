@@ -13,7 +13,7 @@ class HostForm extends React.Component {
       method: 'POST',
       body: formInputs
     };
-    fetch('/api/hosts', init)
+    fetch(`/api/pools/${this.props.hostId}`, init)
       .then(res => res.json())
       .catch(err => console.error(err));
 
@@ -27,14 +27,10 @@ class HostForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className='row'>
             <div className='column'>
-              <label htmlFor='name'>Name</label>
-              <input className='input' type='text' name='name'></input>
-            </div>
-            <div className='column'>
               <label htmlFor='location'>Location</label>
               <input className='input' type='text' name='location'></input>
             </div>
-            <div className='column'>
+            <div className='column price'>
               <label htmlFor='price'>Price per hour</label>
               <input className='input' type='text' name='price'></input>
             </div>

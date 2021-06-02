@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/home';
-import Header from './components/header';
+import SwimmerHeader from './components/swimmer-header';
+import HostHeader from './components/host-header';
 import HostForm from './pages/host-form';
 import parseRoute from './lib/parse-route';
 import Search from './pages/search-page';
@@ -8,15 +9,20 @@ import Navbar from './components/navbar';
 import SearchResults from './pages/search-results';
 import PoolInfo from './pages/pool-info';
 import Swimmer from './pages/swimmer';
+import HostNavbar from './components/host-navbar';
+import HostBookingRequests from './pages/host-booking-requests';
+import Host from './pages/host';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.handleSwimmerSignIn = this.handleSwimmerSignIn.bind(this);
+    this.handleHostSignIn = this.handleHostSignIn.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
       type: null,
-      swimmerId: null
+      swimmerId: null,
+      hostId: null
     };
   }
 
@@ -36,6 +42,13 @@ export default class App extends React.Component {
     });
   }
 
+  handleHostSignIn(hostId) {
+    this.setState({
+      type: 'host',
+      hostId
+    });
+  }
+
   renderPage() {
     const { path } = this.state.route;
     const { params } = this.state.route;
@@ -45,25 +58,24 @@ export default class App extends React.Component {
       return <Home />;
     }
     if (path === 'swimmer') {
-      return (
-        <>
-        < Header />
-        < Swimmer onSignIn={this.handleSwimmerSignIn} />
-        </>
-      );
+      return < Swimmer onSignIn={this.handleSwimmerSignIn} />;
+    }
+    if (path === 'host') {
+      return < Host onSignIn={this.handleHostSignIn} />;
     }
     if (path === 'host-form') {
       return (
         <>
-      < Header />
-      < HostForm />
+      < HostHeader />
+      < HostForm hostId={this.state.hostId} />
+      < HostNavbar />
       </>
       );
     }
     if (path === 'search') {
       return (
       <>
-      < Header />
+      < SwimmerHeader />
       < Search />
       < Navbar />
       </>
@@ -72,7 +84,7 @@ export default class App extends React.Component {
     if (path === 'search-results') {
       return (
         <>
-        < Header />
+        < SwimmerHeader />
         < SearchResults location={location} />
         < Navbar />
         </>
@@ -81,9 +93,18 @@ export default class App extends React.Component {
     if (path === 'pool') {
       return (
         <>
-        < Header />
+        < SwimmerHeader />
         < PoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
         < Navbar />
+        </>
+      );
+    }
+    if (path === 'host-bookings') {
+      return (
+        <>
+        < HostHeader />
+        < HostBookingRequests hostId={this.state.hostId} />
+        <HostNavbar />
         </>
       );
     }

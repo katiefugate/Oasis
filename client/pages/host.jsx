@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Swimmer extends React.Component {
+class Host extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,28 +16,28 @@ class Swimmer extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/swimmer', init)
+    fetch('/api/host', init)
       .then(response => response.json())
       .then(body => {
-        this.props.onSignIn(body.swimmerId, body.name);
+        this.props.onSignIn(body.hostId);
       });
-    window.location.hash = '#search';
+    window.location.hash = '#host-form';
   }
 
   render() {
     return (
-      <div>
+      <>
         <div className='header'>
           <h1 className='header-title'>OASIS</h1>
         </div>
-        <form onSubmit={this.handleSubmit} className='swimmer-login'>
+        <form onSubmit={this.handleSubmit} className='host-login'>
           <label htmlFor='name'>Name</label>
-          <input className='swimmer-name' type='name' name='name'></input>
+          <input className='host-name' type='name' name='name'></input>
           <button className='login-button' type='submit'>LOGIN</button>
         </form>
-      </div>
+      </>
     );
   }
 }
 
-export default Swimmer;
+export default Host;
