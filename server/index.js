@@ -43,7 +43,7 @@ app.post('/api/pools/:hostId', uploadsMiddleware, (req, res, next) => {
   const rules = req.body.rules;
   const amenities = req.body.amenities;
   const hostId = req.params.hostId;
-  const url = '/images/' + req.file.filename;
+  const url = req.file.location;
   if (!Number.isInteger(price) || Math.sign(price) !== 1) {
     throw new ClientError(400, 'price must be a positive integer');
   }
