@@ -159,16 +159,24 @@ textarea {
 }
 
 .booking-submit,
-.login-button {
+.login-button,
+.accept-button {
   background-color: rgba(43, 103, 129, 1);
   color: white;
   border-radius: 0.5rem;
 }
 
-.booking-cancel {
+.booking-cancel,
+.decline-button {
   background-color: black;
   color: white;
   border-radius: 0.5rem;
+}
+
+.accept-button,
+.decline-button {
+  height: 1.5rem;
+  width: 7rem;
 }
 
 .host-submit-button:hover,

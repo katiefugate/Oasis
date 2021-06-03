@@ -5,9 +5,11 @@ class HostBookingRequests extends React.Component {
   constructor(props) {
     super(props);
     this.renderBookings = this.renderBookings.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       isLoading: true,
-      bookings: null
+      bookings: null,
+      statusChanged: false
     };
   }
 
@@ -22,6 +24,25 @@ class HostBookingRequests extends React.Component {
       });
   }
 
+  handleClick(event) {
+    const bookingId = event.target.parentElement.parentElement.id;
+    let status = null;
+    if (event.target.className === 'accept-button') {
+      status = 'accepted';
+    } else {
+      status = 'declined';
+    }
+    const init = {
+      method: 'PUT',
+      body: JSON.stringify({ status }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/host/booking-status/${bookingId}`, init)
+      .then(res => res.json());
+  }
+
   renderBookings() {
     const bookings = this.state.bookings.map(booking => {
       const startD = format(new Date(booking.date + ' ' + booking.startTime), 'MM/dd/yyyy h:mm aaa');
@@ -30,10 +51,16 @@ class HostBookingRequests extends React.Component {
       const start = startD.substring(11);
       const end = endD.substring(11);
       return (
-        <div className='booking-container' key={booking.bookingId}>
+        <div id={booking.bookingId} className='booking-container' key={booking.bookingId}>
+          <div className='column-half'>
           <p className='booking-info'>{booking.name}</p>
           <p className='booking-info'>{date}</p>
           <p className='booking-info'>{start} to {end}</p>
+          </div>
+          <div className='column-half booking-request-buttons'>
+          <button onClick={this.handleClick} className='accept-button'>Accept</button>
+          <button onClick={this.handleClick} className='decline-button'>Decline</button>
+          </div>
         </div>
       );
     });
