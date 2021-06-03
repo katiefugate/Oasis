@@ -2,10 +2,6 @@
   display: none;
 }
 
-#root {
-  margin-bottom: 8rem;
-}
-
 .host-form-container {
   padding-top: 3rem;
 }
@@ -80,7 +76,6 @@ form {
 }
 
 .pool-info-container {
-  margin-bottom: 10rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -166,6 +161,8 @@ form {
 
 .booking-container {
   margin-bottom: 3rem;
+  display: flex;
+  padding: 0 1rem;
 }
 
 .booking-input {
@@ -179,6 +176,29 @@ form {
   width: 30%;
   align-self: center;
   height: 2rem;
+}
+
+.booking-request-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.accept-button {
+  margin-bottom: 3rem;
+  margin-top: 0.75rem;
+}
+
+.bookings-container,
+.host-form-container,
+.pool-info-container,
+.search-container,
+.pool-list-container {
+  margin-bottom: 10rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -311,10 +331,20 @@ form {
   }
 
   .booking-container {
-    flex-basis: 25%;
+    flex-direction: column;
+    flex-basis: calc(100% / 3);
   }
 
   .login-button {
     width: 10rem;
+  }
+
+  .booking-request-buttons {
+    flex-direction: row;
+  }
+
+  .accept-button {
+    margin-right: 2.5rem;
+    margin-bottom: 0;
   }
 }

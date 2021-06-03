@@ -171,7 +171,7 @@ app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
          "bookingRequests"."bookingId"
     from "bookingRequests"
     join "swimmers" using ("swimmerId")
-   where "hostId" = $1`;
+   where "hostId" = $1 AND "status" = 'pending'`;
   const params = [hostId];
 
   db.query(sql, params)
