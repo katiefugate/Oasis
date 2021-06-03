@@ -1,19 +1,24 @@
-const path = require('path');
 const multer = require('multer');
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk');
 
-const imagesDirectory = path.join(__dirname, 'public/images');
-
-const storage = multer.diskStorage({
-  destination(req, file, callback) {
-    callback(null, imagesDirectory);
-  },
-  filename(req, file, callback) {
-    const fileExtension = path.extname(file.originalname);
-    const name = `${file.fieldname}-${Date.now()}${fileExtension}`;
-    callback(null, name);
-  }
+const s3 = new aws.S3({
+  accessKeyId: 'AKIAU2BTZSVQ6SMW6IOW',
+  secretAccessKey: '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'
 });
 
-const uploadsMiddleware = multer({ storage }).single('image');
+const uploadsMiddleware = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'oasis.swim',
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString());
+    }
+  })
+}).single('image');
 
 module.exports = uploadsMiddleware;
