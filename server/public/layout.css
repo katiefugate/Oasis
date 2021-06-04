@@ -2,6 +2,15 @@
   display: none;
 }
 
+.valid {
+  display: none;
+}
+
+.invalid {
+  text-align: center;
+  margin-top: 3rem;
+}
+
 .host-form-container {
   padding-top: 3rem;
 }
@@ -29,7 +38,8 @@ form {
   height: 90vh;
 }
 
-.sign-up-link {
+.sign-up-link,
+.sign-in-link {
   align-self: center;
 }
 
@@ -162,13 +172,6 @@ form {
   height: 2.5rem;
 }
 
-.login-button {
-  margin-top: 2rem;
-  width: 30%;
-  align-self: center;
-  height: 2rem;
-}
-
 .booking-request-buttons {
   display: flex;
   flex-direction: column;
@@ -208,9 +211,32 @@ form {
   margin-bottom: 0.25rem;
 }
 
-.sign-up-input {
+.sign-up-input,
+.sign-in-input {
   margin-bottom: 2rem;
   border-radius: 0.5rem;
+}
+
+.auth-header {
+  margin-bottom: 4rem;
+  margin-top: 3rem;
+}
+
+.sign-up-button,
+.sign-in-button {
+  align-self: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-button {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  margin-bottom: 8rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -347,10 +373,6 @@ form {
     flex-basis: calc(100% / 3);
   }
 
-  .login-button {
-    width: 10rem;
-  }
-
   .booking-request-buttons {
     flex-direction: row;
   }
@@ -360,11 +382,19 @@ form {
     margin-bottom: 0;
   }
 
-  .sign-up-input {
-    width: 20rem;
+  .sign-up-input,
+  .sign-in-input {
+    width: 25rem;
   }
 
   .header-sign-up {
     text-align: center;
+  }
+
+  .sign-up-form,
+  .sign-in-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

@@ -2,6 +2,7 @@ label,
 .host-form-title,
 .host-button,
 .sign-up-button,
+.sign-in-button,
 .pool-list-price,
 .pool-list-location,
 .search-link,
@@ -11,7 +12,10 @@ label,
 .info-titles,
 .pool-info-location,
 .booking-title,
-.booking-requests-link {
+.booking-requests-link,
+.auth-header,
+.home-button,
+.invalid {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -22,7 +26,8 @@ label,
 
 .header,
 .header-home,
-.header-sign-up {
+.header-sign-up,
+.header-sign-in {
   background-color: rgba(43, 103, 129, 1);
   padding: 0.5px;
   text-align: center;
@@ -31,7 +36,8 @@ label,
   font-size: 1.25rem;
 }
 
-.host-form-title {
+.host-form-title,
+.auth-header {
   text-align: center;
 }
 
@@ -71,8 +77,8 @@ textarea {
   background-color: rgba(43, 103, 129, 1);
 }
 
-.host-button,
-.sign-up-button {
+.sign-up-button,
+.sign-in-button {
   width: 8rem;
   margin: 3rem;
   padding: 1rem 0;
@@ -160,7 +166,8 @@ textarea {
 }
 
 .booking-submit,
-.login-button,
+.sign-up-button,
+.sign-in-button,
 .accept-button {
   background-color: rgba(43, 103, 129, 1);
   color: white;
@@ -192,4 +199,13 @@ button {
 
 button {
   border: none;
+}
+
+.home-button {
+  font-size: 1.25em;
+}
+
+.invalid {
+  color: red;
+  font-size: 2rem;
 }

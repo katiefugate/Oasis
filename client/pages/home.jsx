@@ -9,7 +9,10 @@ class Home extends React.Component {
         </div>
         <div className='user-buttons-container'>
           <a className='sign-up-link' href='#sign-up'>
-            <button className='sign-up-button'>Sign Up</button>
+            <button className='home-button'>Sign Up</button>
+          </a>
+          <a className='sign-in-link' href='#sign-in'>
+            <button className='home-button'>Sign in</button>
           </a>
         </div>
       </>
