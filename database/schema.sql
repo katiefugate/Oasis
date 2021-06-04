@@ -11,13 +11,19 @@ create table "public"."hosts" (
   "hostId"    serial,
   "name"      text    not null,
   "poolId"    integer,
-  primary key ("hostId")
+  "username"  text    not null,
+  "password"  text    not null,
+  primary key ("hostId"),
+  unique ("username")
 );
 
 create table "public"."swimmers" (
   "swimmerId"   serial,
-  name          text    not null,
-  primary key ("swimmerId")
+   "name"       text    not null,
+   "username"   text    not null,
+   "password"   text    not null,
+  primary key ("swimmerId"),
+  unique ("username")
 );
 
 

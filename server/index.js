@@ -5,6 +5,7 @@ const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const uploadsMiddleware = require('./uploads-middlewear');
+const argon2 = require('argon2');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -22,16 +23,25 @@ app.use(json);
 app.use(staticMiddleware);
 
 app.post('/api/host', (req, res, next) => {
-  const name = req.body.name;
-  const sql = `
-    insert into "hosts"("name", "hostId", "poolId")
-    values($1, $2, $3)
-    returning *`;
-  const params = [name, 1, null];
+  const { name, username, password } = req.body;
+  if (!name || !username || !password) {
+    throw new ClientError(400, 'name, username and password are required!');
+  }
 
-  db.query(sql, params)
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+        insert into "hosts"("name", "username", "password", "poolId")
+                     values($1, $2, $3, $4)
+        returning "name", "username", "hostId"`;
+      const params = [name, username, hashedPassword, null];
+
+      return db.query(sql, params);
+    })
     .then(result => {
-      res.status(201).json(result.rows[0]);
+      const [user] = result.rows;
+      res.status(201).json(user);
     })
     .catch(err => next(err));
 });
@@ -145,17 +155,23 @@ app.post('/api/book', (req, res, next) => {
 });
 
 app.post('/api/swimmer', (req, res, next) => {
-  const name = req.body.name;
-
-  const sql = `
-    insert into swimmers ("name", "swimmerId")
-                  values($1 , $2)
-                  returning *`;
-  const params = [name, 1];
-
-  db.query(sql, params)
+  const { name, username, password } = req.body;
+  if (!name || !username || !password) {
+    throw new ClientError(400, 'name, username and password are required!');
+  }
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+        insert into swimmers ("name","username", "password")
+                       values($1 , $2, $3)
+                       returning "username", "name", "swimmerId"`;
+      const params = [name, username, hashedPassword];
+      return db.query(sql, params);
+    })
     .then(result => {
-      res.status(201).json(result.rows[0]);
+      const [user] = result.rows;
+      res.status(201).json(user);
     })
     .catch(err => next(err));
 });
