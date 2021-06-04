@@ -29,8 +29,7 @@ form {
   height: 90vh;
 }
 
-.host-link,
-.swimmer-link {
+.sign-up-link {
   align-self: center;
 }
 
@@ -128,14 +127,6 @@ form {
   border-radius: 0.5rem;
 }
 
-.swimmer-login,
-.host-login {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  padding-top: 5rem;
-}
-
 .booking-submit,
 .booking-cancel {
   width: 40%;
@@ -199,6 +190,27 @@ form {
 .search-container,
 .pool-list-container {
   margin-bottom: 10rem;
+}
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+#host {
+  margin-left: 5rem;
+}
+
+#host,
+#swimmer {
+  margin-bottom: 0.25rem;
+}
+
+.sign-up-input {
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -346,5 +358,13 @@ form {
   .accept-button {
     margin-right: 2.5rem;
     margin-bottom: 0;
+  }
+
+  .sign-up-input {
+    width: 20rem;
+  }
+
+  .header-sign-up {
+    text-align: center;
   }
 }

@@ -1,7 +1,7 @@
 label,
 .host-form-title,
 .host-button,
-.swimmer-button,
+.sign-up-button,
 .pool-list-price,
 .pool-list-location,
 .search-link,
@@ -21,7 +21,8 @@ label,
 }
 
 .header,
-.header-home {
+.header-home,
+.header-sign-up {
   background-color: rgba(43, 103, 129, 1);
   padding: 0.5px;
   text-align: center;
@@ -71,7 +72,7 @@ textarea {
 }
 
 .host-button,
-.swimmer-button {
+.sign-up-button {
   width: 8rem;
   margin: 3rem;
   padding: 1rem 0;
@@ -181,7 +182,6 @@ textarea {
 
 .host-submit-button:hover,
 .search-link:hover,
-.swimmer-button:hover,
 .host-button:hover,
 .search-icon:hover,
 .search-button:hover,

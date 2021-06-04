@@ -8,16 +8,14 @@ import Search from './pages/search-page';
 import Navbar from './components/navbar';
 import SearchResults from './pages/search-results';
 import PoolInfo from './pages/pool-info';
-import Swimmer from './pages/swimmer';
 import HostNavbar from './components/host-navbar';
 import HostBookingRequests from './pages/host-booking-requests';
-import Host from './pages/host';
+import SignUp from './pages/sign-up';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSwimmerSignIn = this.handleSwimmerSignIn.bind(this);
-    this.handleHostSignIn = this.handleHostSignIn.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
       type: null,
@@ -34,19 +32,20 @@ export default class App extends React.Component {
     });
   }
 
-  handleSwimmerSignIn(swimmerId, name) {
-    this.setState({
-      type: 'swimmer',
-      swimmerId,
-      name
-    });
-  }
-
-  handleHostSignIn(hostId) {
-    this.setState({
-      type: 'host',
-      hostId
-    });
+  handleSignUp(type, id) {
+    if (type === 'swimmer') {
+      this.setState({
+        type: 'swimmer',
+        swimmerId: id,
+        hostId: null
+      });
+    } else {
+      this.setState({
+        type: 'host',
+        swimmerId: null,
+        hostId: id
+      });
+    }
   }
 
   renderPage() {
@@ -57,11 +56,8 @@ export default class App extends React.Component {
     if (path === '') {
       return <Home />;
     }
-    if (path === 'swimmer') {
-      return < Swimmer onSignIn={this.handleSwimmerSignIn} />;
-    }
-    if (path === 'host') {
-      return < Host onSignIn={this.handleHostSignIn} />;
+    if (path === 'sign-up') {
+      return < SignUp onSignUp={this.handleSignUp} />;
     }
     if (path === 'host-form') {
       return (
