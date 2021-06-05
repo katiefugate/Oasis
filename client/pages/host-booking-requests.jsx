@@ -64,6 +64,9 @@ class HostBookingRequests extends React.Component {
         </div>
       );
     });
+    if (!bookings[0]) {
+      return <h1 className='no-bookings'>You have no pending booking requests.</h1>;
+    }
     return bookings;
   }
 

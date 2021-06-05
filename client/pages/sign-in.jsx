@@ -22,12 +22,12 @@ class SignIn extends React.Component {
         .then(response => response.json())
         .then(body => {
           this.props.onSignIn('host', body);
+          if (body.error) {
+            window.location.hash = '#sign-in';
+          } else {
+            window.location.hash = '#host-form';
+          }
         });
-      if (this.props.invalid === 'invalid') {
-        window.location.hash = 'sign-in';
-      } else {
-        window.location.hash = '#host-form';
-      }
     } else {
       const init = {
         method: 'POST',
@@ -40,12 +40,12 @@ class SignIn extends React.Component {
         .then(response => response.json())
         .then(body => {
           this.props.onSignIn('swimmer', body);
+          if (body.error) {
+            window.location.hash = '#sign-in';
+          } else {
+            window.location.hash = '#search';
+          }
         });
-      if (this.props.invalid) {
-        window.location.hash = 'sign-in';
-      } else {
-        window.location.hash = '#search';
-      }
     }
   }
 

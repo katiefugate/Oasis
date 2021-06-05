@@ -19,6 +19,7 @@ export default class App extends React.Component {
     super(props);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
       type: null,
@@ -97,6 +98,16 @@ export default class App extends React.Component {
     }
   }
 
+  handleSignOut() {
+    window.localStorage.removeItem('oasis-user');
+    this.setState({
+      type: null,
+      swimmerId: null,
+      hostId: null
+    });
+    window.location.hash = '#';
+  }
+
   renderPage() {
     const { path } = this.state.route;
     const { params } = this.state.route;
@@ -114,7 +125,7 @@ export default class App extends React.Component {
     if (path === 'host-form') {
       return (
         <>
-      < HostHeader />
+      < HostHeader onSignOut={this.handleSignOut}/>
       < HostForm hostId={this.state.hostId} />
       < HostNavbar />
       </>
@@ -123,7 +134,7 @@ export default class App extends React.Component {
     if (path === 'search') {
       return (
       <>
-      < SwimmerHeader />
+      < SwimmerHeader onSignOut={this.handleSignOut} />
       < Search />
       < Navbar />
       </>
@@ -132,7 +143,7 @@ export default class App extends React.Component {
     if (path === 'search-results') {
       return (
         <>
-        < SwimmerHeader />
+        < SwimmerHeader onSignOut={this.handleSignOut} />
         < SearchResults location={location} />
         < Navbar />
         </>
@@ -141,7 +152,7 @@ export default class App extends React.Component {
     if (path === 'pool') {
       return (
         <>
-        < SwimmerHeader />
+        < SwimmerHeader onSignOut={this.handleSignOut}/>
         < PoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
         < Navbar />
         </>
@@ -150,7 +161,7 @@ export default class App extends React.Component {
     if (path === 'host-bookings') {
       return (
         <>
-        < HostHeader />
+        < HostHeader onSignOut={this.handleSignOut}/>
         < HostBookingRequests hostId={this.state.hostId} />
         <HostNavbar />
         </>

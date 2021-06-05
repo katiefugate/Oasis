@@ -15,7 +15,9 @@ label,
 .booking-requests-link,
 .auth-header,
 .home-button,
-.invalid {
+.invalid,
+.sign-out-button,
+.no-bookings {
   font-family: 'Montserrat', sans-serif;
 }
 
