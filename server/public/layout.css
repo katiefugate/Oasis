@@ -239,6 +239,20 @@ form {
   margin-bottom: 8rem;
 }
 
+.sign-out-button {
+  height: 2rem;
+  width: 5rem;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 2.25rem;
+  left: 1rem;
+}
+
+.no-bookings {
+  width: 100%;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
@@ -319,7 +333,7 @@ form {
   }
 
   .header-title {
-    padding: 0 3rem;
+    padding: 0 8rem;
   }
 
   .pool-info-container {
