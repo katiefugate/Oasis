@@ -87,6 +87,7 @@ form {
 .pool-info-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 100%;
   padding: 0 1.5rem;
 }
@@ -136,6 +137,8 @@ form {
   top: 10%;
   left: 0;
   border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .booking-submit,
@@ -171,7 +174,7 @@ form {
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   height: 2.5rem;
-  width: 100%;
+  width: 18rem;
 }
 
 .booking-request-buttons {
@@ -194,7 +197,7 @@ form {
 .pool-info-container,
 .search-container,
 .pool-list-container {
-  margin-bottom: 6rem;
+  margin-bottom: 5.35rem;
 }
 
 .radio-container {
