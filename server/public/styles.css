@@ -211,8 +211,3 @@ button {
   color: red;
   font-size: 2rem;
 }
-
-button:hover,
-a:hover {
-  transform: scale(1.1);
-}

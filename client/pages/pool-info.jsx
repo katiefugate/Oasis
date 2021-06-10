@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SwimmerPoolInfo extends React.Component {
+class PoolInfo extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -106,4 +106,4 @@ class SwimmerPoolInfo extends React.Component {
   }
 }
 
-export default SwimmerPoolInfo;
+export default PoolInfo;

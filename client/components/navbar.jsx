@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SwimmerNavbar extends React.Component {
+class Navbar extends React.Component {
 
   render() {
     return (
@@ -11,4 +11,4 @@ class SwimmerNavbar extends React.Component {
   }
 }
 
-export default SwimmerNavbar;
+export default Navbar;

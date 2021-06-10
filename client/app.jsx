@@ -4,10 +4,10 @@ import SwimmerHeader from './components/swimmer-header';
 import HostHeader from './components/host-header';
 import HostForm from './pages/host-form';
 import parseRoute from './lib/parse-route';
-import SwimmerSearch from './pages/search-page';
-import SwimmerNavbar from './components/swimmer-navbar';
-import SwimmerSearchResults from './pages/search-results';
-import SwimmerPoolInfo from './pages/swimmer-pool-info';
+import Search from './pages/search-page';
+import Navbar from './components/navbar';
+import SearchResults from './pages/search-results';
+import PoolInfo from './pages/pool-info';
 import HostNavbar from './components/host-navbar';
 import HostBookingRequests from './pages/host-booking-requests';
 import SignUp from './pages/sign-up';
@@ -114,7 +114,7 @@ export default class App extends React.Component {
     const location = params.get('location');
     const poolId = params.get('poolId');
     if (path === '') {
-      return < Home />;
+      return <Home />;
     }
     if (path === 'sign-up') {
       return < SignUp onSignUp={this.handleSignUp} />;
@@ -135,8 +135,8 @@ export default class App extends React.Component {
       return (
       <>
       < SwimmerHeader onSignOut={this.handleSignOut} />
-      < SwimmerSearch />
-      < SwimmerNavbar />
+      < Search />
+      < Navbar />
       </>
       );
     }
@@ -144,8 +144,8 @@ export default class App extends React.Component {
       return (
         <>
         < SwimmerHeader onSignOut={this.handleSignOut} />
-        < SwimmerSearchResults location={location} />
-        < SwimmerNavbar />
+        < SearchResults location={location} />
+        < Navbar />
         </>
       );
     }
@@ -153,8 +153,8 @@ export default class App extends React.Component {
       return (
         <>
         < SwimmerHeader onSignOut={this.handleSignOut}/>
-        < SwimmerPoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
-        < SwimmerNavbar />
+        < PoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
+        < Navbar />
         </>
       );
     }
@@ -163,7 +163,7 @@ export default class App extends React.Component {
         <>
         < HostHeader onSignOut={this.handleSignOut}/>
         < HostBookingRequests hostId={this.state.hostId} />
-        < HostNavbar />
+        <HostNavbar />
         </>
       );
     }

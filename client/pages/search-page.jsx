@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SwimmerSearch extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -30,4 +30,4 @@ class SwimmerSearch extends React.Component {
   }
 }
 
-export default SwimmerSearch;
+export default Search;

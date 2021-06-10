@@ -132,9 +132,8 @@ form {
   background-color: white;
   border: 2px solid black;
   padding: 2rem 2rem;
-  width: 100%;
-  top: 10%;
-  left: 0;
+  width: 90%;
+  top: 30%;
   border-radius: 0.5rem;
 }
 
@@ -171,7 +170,6 @@ form {
   border-radius: 0.5rem;
   margin-bottom: 1.5rem;
   height: 2.5rem;
-  width: 100%;
 }
 
 .booking-request-buttons {
@@ -194,7 +192,7 @@ form {
 .pool-info-container,
 .search-container,
 .pool-list-container {
-  margin-bottom: 6rem;
+  margin-bottom: 10rem;
 }
 
 .radio-container {
@@ -412,19 +410,5 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .modal {
-    width: 70%;
-    left: auto;
-    top: 25%;
-  }
-
-  .bookings-container,
-  .host-form-container,
-  .pool-info-container,
-  .search-container,
-  .pool-list-container {
-    margin-bottom: 0;
   }
 }
