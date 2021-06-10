@@ -212,7 +212,9 @@ button {
   font-size: 2rem;
 }
 
-button:hover,
-a:hover {
-  transform: scale(1.1);
+@media screen and (min-width: 768px) {
+  button:hover,
+  a:hover {
+    transform: scale(1.1);
+  }
 }
