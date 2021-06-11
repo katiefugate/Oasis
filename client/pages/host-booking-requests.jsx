@@ -45,9 +45,11 @@ class HostBookingRequests extends React.Component {
 
   renderBookings() {
     const bookings = this.state.bookings.map(booking => {
-      const startD = format(new Date(booking.date + ' ' + booking.startTime), 'MM/dd/yyyy h:mm aaa');
-      const endD = format(new Date(booking.date + ' ' + booking.endTime), 'MM/dd/yyyy h:mm aaa');
-      const date = format(new Date(booking.date), 'MM/dd/yyyy');
+      const re = /-/g;
+      const newDate = booking.date.replace(re, '/');
+      const startD = format(new Date(newDate + ' ' + booking.startTime), 'MM/dd/yyyy h:mm aaa');
+      const endD = format(new Date(newDate + ' ' + booking.endTime), 'MM/dd/yyyy h:mm aaa');
+      const date = format(new Date(newDate), 'MM/dd/yyyy');
       const start = startD.substring(11);
       const end = endD.substring(11);
       return (
