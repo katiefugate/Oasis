@@ -1,6 +1,6 @@
-# final-project
+# Oasis
 
-A full stack JavaScript app for renting out someones pool or listing your own pool to be rented.
+A full-stack JavaScript web application for renting someones pool, or listing your own pool to be rented.
 
 [LIVE](https://swim-oasis.herokuapp.com/)
 
