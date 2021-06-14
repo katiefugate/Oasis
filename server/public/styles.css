@@ -222,6 +222,13 @@ button {
   color: white;
 }
 
+.no-type {
+  color: red;
+  font-size: 1.5rem;
+  margin-top: 0;
+  text-align: center;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover {
