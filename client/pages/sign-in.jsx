@@ -4,6 +4,11 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      username: 'demo',
+      password: 'mickeymouse'
+    };
   }
 
   handleSubmit(event) {
@@ -49,6 +54,11 @@ class SignIn extends React.Component {
     }
   }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
   render() {
     return (
       <div>
@@ -66,11 +76,11 @@ class SignIn extends React.Component {
           </div>
           <div className='input-container'>
             <label className='sign-in-label' htmlFor='username'>Username</label>
-            <input className='sign-in-input' type='username' name='username'></input>
+            <input onChange={this.handleChange} className='sign-in-input' type='username' name='username' value={this.state.username}></input>
           </div>
           <div className='input-container'>
             <label className='sign-in-label' htmlFor="password">Password</label>
-            <input className='sign-in-input' type="password" name="password"></input>
+            <input onChange={this.handleChange} className='sign-in-input' type="password" name="password" value={this.state.password}></input>
           </div>
           <button className='sign-in-button' type='submit'>Sign in!</button>
         </form>
