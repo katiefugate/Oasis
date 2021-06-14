@@ -35,7 +35,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 90vh;
+  height: 80vh;
 }
 
 .sign-up-link,
@@ -255,6 +255,18 @@ form {
 
 .no-bookings {
   width: 100%;
+  text-align: center;
+}
+
+.home-description {
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.home-or,
+.home-host {
+  margin: 0;
+  padding-top: 1rem;
   text-align: center;
 }
 

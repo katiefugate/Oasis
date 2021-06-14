@@ -22,7 +22,10 @@ label,
 }
 
 .info-p,
-.booking-container {
+.booking-container,
+.home-description,
+.home-or,
+.home-host {
   font-family: 'Short Stack', cursive;
 }
 
@@ -210,6 +213,13 @@ button {
 .invalid {
   color: red;
   font-size: 2rem;
+}
+
+.home-description,
+.home-or,
+.home-host {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
 }
 
 @media screen and (min-width: 768px) {
