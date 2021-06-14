@@ -7,7 +7,8 @@ class SignIn extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       username: 'demo',
-      password: 'mickeymouse'
+      password: 'mickeymouse',
+      noType: 'hidden'
     };
   }
 
@@ -15,7 +16,11 @@ class SignIn extends React.Component {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
+    if (!event.target.user.value) {
+      this.setState({ noType: 'no-type' });
+    }
     if (event.target.user.value === 'host') {
+      this.setState({ noType: 'hidden' });
       const init = {
         method: 'POST',
         body: JSON.stringify({ username, password }),
@@ -33,7 +38,8 @@ class SignIn extends React.Component {
             window.location.hash = '#host-form';
           }
         });
-    } else {
+    } else if (event.target.user.value === 'swimmer') {
+      this.setState({ noType: 'hidden' });
       const init = {
         method: 'POST',
         body: JSON.stringify({ username, password }),
@@ -68,6 +74,7 @@ class SignIn extends React.Component {
         <div className={this.props.invalid}>Invalid Login!</div>
         <form onSubmit={this.handleSubmit} className='sign-in-form'>
           <h1 className='auth-header'>Sign in to continue</h1>
+          <p className={this.state.noType}>Please pick an account type!</p>
           <div className='radio-container'>
             <input type='radio' name='user' id='swimmer' value='swimmer'></input>
             <label htmlFor='swimmer'>Swimmer</label>
