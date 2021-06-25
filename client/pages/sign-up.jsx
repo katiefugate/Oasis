@@ -9,37 +9,23 @@ class SignUp extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const name = event.target.name.value;
-    const username = event.target.username.value;
+    const username = event.target.name.value;
     const password = event.target.password.value;
-    if (event.target.user.value === 'host') {
-      const init = {
-        method: 'POST',
-        body: JSON.stringify({ name, username, password }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch('/api/host', init)
-        .then(response => response.json())
-        .then(body => {
-          this.props.onSignUp('host', body.hostId);
-        });
-      window.location.hash = '#sign-in';
-    } else {
-      const init = {
-        method: 'POST',
-        body: JSON.stringify({ name, username, password }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch('/api/swimmer', init)
-        .then(response => response.json())
-        .then(body => {
-          this.props.onSignUp('swimmer', body.swimmerId);
-        });
-      window.location.hash = '#sign-in';
-    }
+    const type = event.target.user.value;
+
+    const init = {
+      method: 'POST',
+      body: JSON.stringify({ name, username, password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/sign-up', init)
+      .then(response => response.json())
+      .then(body => {
+        this.props.onSignUp(type, body.userId);
+      });
+    window.location.hash = '#sign-in';
   }
 
   render() {
