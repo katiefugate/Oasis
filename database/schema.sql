@@ -6,26 +6,6 @@ drop schema "public" cascade;
 
 create schema "public";
 
-
--- create table "public"."hosts" (
---   "hostId"    serial,
---   "name"      text    not null,
---   "poolId"    integer,
---   "username"  text    not null,
---   "password"  text    not null,
---   primary key ("hostId"),
---   unique ("username")
--- );
-
--- create table "public"."swimmers" (
---   "swimmerId"   serial,
---    "name"       text    not null,
---    "username"   text    not null,
---    "password"   text    not null,
---   primary key ("swimmerId"),
---   unique ("username")
--- );
-
 create table "public"."users" (
   "userId"     serial,
   "name"       text   not null,
@@ -58,5 +38,7 @@ create table "public"."bookingRequests" (
   "startTime"     text    not null,
   "endTime"       text    not null,
   "status"        text    not null,
-  primary key ("bookingId")
+  primary key ("bookingId"),
+  index ("swimmerId"),
+  index ("poolId")
 );
