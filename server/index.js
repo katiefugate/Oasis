@@ -219,6 +219,26 @@ app.put('/api/host/booking-status/:bookingId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/host/pools/:hostId', (req, res, next) => {
+  const hostId = parseInt(req.params.hostId, 10);
+  if (!Number.isInteger(hostId) || Math.sign(hostId) !== 1) {
+    throw new ClientError(400, 'hostId must be a positive integer');
+  }
+
+  const sql = `
+  select "poolId",
+         "location",
+         "image"
+    from "pools"
+  where "hostId" = $1`;
+  const params = [hostId];
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    });
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
