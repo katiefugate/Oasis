@@ -16,48 +16,32 @@ class SignIn extends React.Component {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
-    if (!event.target.user.value) {
+    const type = event.target.user.value;
+    if (!type) {
       this.setState({ noType: 'no-type' });
-    }
-    if (event.target.user.value === 'host') {
+    } else {
       this.setState({ noType: 'hidden' });
-      const init = {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch('/api/host/sign-in', init)
-        .then(response => response.json())
-        .then(body => {
-          this.props.onSignIn('host', body);
-          if (body.error) {
-            window.location.hash = '#sign-in';
-          } else {
-            window.location.hash = '#host-form';
-          }
-        });
-    } else if (event.target.user.value === 'swimmer') {
-      this.setState({ noType: 'hidden' });
-      const init = {
-        method: 'POST',
-        body: JSON.stringify({ username, password }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch('/api/swimmer/sign-in', init)
-        .then(response => response.json())
-        .then(body => {
-          this.props.onSignIn('swimmer', body);
-          if (body.error) {
-            window.location.hash = '#sign-in';
-          } else {
-            window.location.hash = '#search';
-          }
-        });
     }
+    const init = {
+      method: 'POST',
+      body: JSON.stringify({ username, password, type }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    fetch('/api/sign-in', init)
+      .then(response => response.json())
+      .then(body => {
+        this.props.onSignIn(type, body);
+        if (body.error) {
+          window.location.hash = '#sign-in';
+        } else if (type === 'swimmer') {
+          window.location.hash = '#search';
+        } else if (type === 'host') {
+          window.location.hash = '#host-form';
+        }
+      });
   }
 
   handleChange(event) {

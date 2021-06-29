@@ -23,20 +23,19 @@ app.use(json);
 
 app.use(staticMiddleware);
 
-app.post('/api/host', (req, res, next) => {
+app.post('/api/sign-up', (req, res, next) => {
   const { name, username, password } = req.body;
   if (!name || !username || !password) {
-    throw new ClientError(400, 'name, username and password are required!');
+    throw new ClientError(400, 'name, username, and password are required!');
   }
-
   argon2
     .hash(password)
     .then(hashedPassword => {
       const sql = `
-        insert into "hosts"("name", "username", "password", "poolId")
-                     values($1, $2, $3, $4)
-        returning "name", "username", "hostId"`;
-      const params = [name, username, hashedPassword, null];
+        insert into "users"("name", "username", "password")
+                    values ($1, $2, $3)
+        returning "name", "username"`;
+      const params = [name, username, hashedPassword];
 
       return db.query(sql, params);
     })
@@ -47,71 +46,34 @@ app.post('/api/host', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/host/sign-in', (req, res, next) => {
-  const { username, password } = req.body;
+app.post('/api/sign-in', (req, res, next) => {
+  const { username, password, type } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'username and password are required!');
   }
   const sql = `
   select "username",
          "password" as "hashedPassword",
-         "hostId"
-    from "hosts"
-    where "username" = $1`;
+         "userId"
+         from "users"
+  where "username" = $1`;
   const params = [username];
-
   db.query(sql, params)
     .then(result => {
       const [user] = result.rows;
       if (!user) {
         throw new ClientError(401, 'invalid login');
       }
-      const { hostId, hashedPassword } = user;
+      const { userId, hashedPassword } = user;
       return argon2
         .verify(hashedPassword, password)
         .then(isMatching => {
           if (!isMatching) {
-            throw new ClientError(401, 'invalid login');
+            throw new ClientError(401, 'invalid login!');
           }
-          const type = 'host';
-          const payload = { hostId, username, type };
+          const payload = { userId, username, type };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          res.json({ token, user: payload });
-        });
-    })
-    .catch(err => next(err));
-});
-
-app.post('/api/swimmer/sign-in', (req, res, next) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    throw new ClientError(400, 'username and password are required!');
-  }
-  const sql = `
-  select "username",
-         "password" as "hashedPassword",
-         "swimmerId"
-    from "swimmers"
-    where "username" = $1`;
-  const params = [username];
-
-  db.query(sql, params)
-    .then(result => {
-      const [user] = result.rows;
-      if (!user) {
-        throw new ClientError(401, 'invalid login');
-      }
-      const { swimmerId, hashedPassword } = user;
-      return argon2
-        .verify(hashedPassword, password)
-        .then(isMatching => {
-          if (!isMatching) {
-            throw new ClientError(401, 'invalid login');
-          }
-          const type = 'swimmer';
-          const payload = { swimmerId, username, type };
-          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-          res.json({ token, user: payload });
+          res.status(200).json({ token, user: payload });
         });
     })
     .catch(err => next(err));
@@ -131,20 +93,13 @@ app.post('/api/pools/:hostId', uploadsMiddleware, (req, res, next) => {
   if (!location || !price || !description || !rules || !amenities) {
     throw new ClientError(400, 'name, location, price, description, rules, and amenities are required fields!');
   }
-  const sql = `insert into "pools"("hostId", "location", "price", "description", "rules", "amenities", "image", "poolId")
-    values($1, $2, $3, $4, $5, $6, $7, $8)
+  const sql = `insert into "pools"("hostId", "location", "price", "description", "rules", "amenities", "image")
+    values($1, $2, $3, $4, $5, $6, $7)
     returning *`;
-  const params = [hostId, location, price, description, rules, amenities, url, 1];
-
-  const sql2 = `update "hosts"
-  set "poolId" = $1
-  where "hostId" = $2`;
-  const params2 = [1, hostId];
+  const params = [hostId, location, price, description, rules, amenities, url];
 
   db.query(sql, params)
     .then(result => {
-      db.query(sql2, params2)
-        .catch(err => next(err));
       res.status(201).json(result.rows[0]);
     })
     .catch(err => next(err));
@@ -181,9 +136,9 @@ app.get('/api/pool/:poolId', (req, res, next) => {
            "pools"."amenities",
            "pools"."image",
            "pools"."hostId",
-           "hosts"."name"
+           "users"."name"
       from "pools"
-      join "hosts" using ("poolId")
+      join "users" on "users"."userId" = "pools"."hostId"
       where "poolId" = $1`;
   const params = [poolId];
   db.query(sql, params)
@@ -199,13 +154,12 @@ app.get('/api/pool/:poolId', (req, res, next) => {
 app.post('/api/book', (req, res, next) => {
   const { swimmerId, poolId, date, startTime, endTime } = req.body;
   if (!swimmerId || !poolId || !date || !startTime || !endTime) {
-    throw new ClientError(400, 'swimmerId, hostId, poolId, date, startTime, and endTime are required fields!');
+    throw new ClientError(400, 'swimmerId, poolId, date, startTime, and endTime are required fields!');
   }
   const sql1 = `
   select "pools"."poolId",
-         "hosts"."hostId"
+         "pools"."hostId"
     from "pools"
-    join "hosts" using ("poolId")
     where "poolId" = $1`;
   const params1 = [poolId];
   db.query(sql1, params1)
@@ -225,39 +179,16 @@ app.post('/api/book', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/swimmer', (req, res, next) => {
-  const { name, username, password } = req.body;
-  if (!name || !username || !password) {
-    throw new ClientError(400, 'name, username and password are required!');
-  }
-  argon2
-    .hash(password)
-    .then(hashedPassword => {
-      const sql = `
-        insert into swimmers ("name","username", "password")
-                       values($1 , $2, $3)
-                       returning "username", "name", "swimmerId"`;
-      const params = [name, username, hashedPassword];
-      return db.query(sql, params);
-    })
-    .then(result => {
-      const [user] = result.rows;
-      res.status(201).json(user);
-    })
-    .catch(err => next(err));
-});
-
 app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
   const hostId = req.params.hostId;
-
   const sql = `
-  select "swimmers"."name",
+  select "users"."name",
          "bookingRequests"."date",
          "bookingRequests"."startTime",
          "bookingRequests"."endTime",
          "bookingRequests"."bookingId"
     from "bookingRequests"
-    join "swimmers" using ("swimmerId")
+    join "users" on "users"."userId" = "bookingRequests"."swimmerId"
    where "hostId" = $1 AND "status" = 'pending'`;
   const params = [hostId];
 

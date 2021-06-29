@@ -44,7 +44,7 @@ export default class App extends React.Component {
     } else if (user.type === 'swimmer') {
       this.setState({
         type: 'swimmer',
-        swimmerId: user.swimmerId,
+        swimmerId: user.userId,
         hostId: null,
         isAuthorizing: false
       });
@@ -52,7 +52,7 @@ export default class App extends React.Component {
       this.setState({
         type: 'host',
         swimmerId: null,
-        hostId: user.hostId,
+        hostId: user.userId,
         isAuthorizing: false
       });
     }
@@ -61,13 +61,11 @@ export default class App extends React.Component {
   handleSignUp(type, id) {
     if (type === 'swimmer') {
       this.setState({
-        type: 'swimmer',
         swimmerId: id,
         hostId: null
       });
     } else {
       this.setState({
-        type: 'host',
         swimmerId: null,
         hostId: id
       });
@@ -84,7 +82,7 @@ export default class App extends React.Component {
     if (type === 'swimmer') {
       this.setState({
         type: 'swimmer',
-        swimmerId: user.swimmerId,
+        swimmerId: user.userId,
         hostId: null,
         invalid: 'valid'
       });
@@ -92,7 +90,7 @@ export default class App extends React.Component {
       this.setState({
         type: 'host',
         swimmerId: null,
-        hostId: user.hostId,
+        hostId: user.userId,
         invalid: 'valid'
       });
     }
