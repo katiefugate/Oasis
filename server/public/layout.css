@@ -273,6 +273,20 @@ form {
   text-align: center;
 }
 
+.navbar {
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.host-pools-header {
+  text-align: center;
+}
+
+.add-pool-link {
+  text-decoration: none;
+  margin-left: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
@@ -444,5 +458,9 @@ form {
   .search-container,
   .pool-list-container {
     margin-bottom: 0;
+  }
+
+  .my-pools-link {
+    margin-left: 1.5rem;
   }
 }

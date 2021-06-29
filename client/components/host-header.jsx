@@ -15,7 +15,10 @@ class HostHeader extends React.Component {
       <div className='header'>
         <button onClick={this.handleClick} className='sign-out-button'>Sign out</button>
         <h1 className='header-title'>OASIS</h1>
-        <span className='desktop-links'><a className='booking-requests-link' href='#host-bookings'>Booking Requests</a></span>
+        <span className='desktop-links'>
+          <a className='booking-requests-link' href='#host-bookings'>Booking Requests</a>
+          <a className='my-pools-link' href='#host-pools'>My Pools</a>
+          </span>
       </div>
     );
   }

@@ -17,7 +17,10 @@ label,
 .home-button,
 .invalid,
 .sign-out-button,
-.no-bookings {
+.no-bookings,
+.host-pools-header,
+.host-pool-location,
+.my-pools-link {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -119,7 +122,8 @@ textarea {
 }
 
 .search-icon,
-.host-bookings-icon {
+.host-bookings-icon,
+.host-pools-icon {
   color: white;
   font-size: 4rem;
   margin: 0.75rem 0;
@@ -173,7 +177,8 @@ textarea {
 .booking-submit,
 .sign-up-button,
 .sign-in-button,
-.accept-button {
+.accept-button,
+.add-pool-button {
   background-color: rgba(43, 103, 129, 1);
   color: white;
   border-radius: 0.5rem;
@@ -227,6 +232,16 @@ button {
   font-size: 1.5rem;
   margin-top: 0;
   text-align: center;
+}
+
+.add-pool-button {
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+}
+
+.my-pools-link {
+  color: white;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 768px) {

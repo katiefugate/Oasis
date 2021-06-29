@@ -13,6 +13,7 @@ import HostBookingRequests from './pages/host-booking-requests';
 import SignUp from './pages/sign-up';
 import SignIn from './pages/sign-in';
 import decodeToken from './lib/decode-token';
+import HostPools from './pages/host-pools';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -162,6 +163,15 @@ export default class App extends React.Component {
         < HostHeader onSignOut={this.handleSignOut}/>
         < HostBookingRequests hostId={this.state.hostId} />
         < HostNavbar />
+        </>
+      );
+    }
+    if (path === 'host-pools') {
+      return (
+        <>
+          < HostHeader onSignOut={this.handleSignOut} />
+          < HostPools hostId={this.state.hostId}/>
+          < HostNavbar />
         </>
       );
     }
