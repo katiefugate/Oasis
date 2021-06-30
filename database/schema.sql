@@ -25,8 +25,7 @@ create table "public"."pools" (
   "amenities"   text     not null,
   "image"       text     not null,
   "hostId"      integer  not null,
-  primary key ("poolId"),
-  index ("hostId")
+  primary key ("poolId")
 );
 
 create table "public"."bookingRequests" (
@@ -38,7 +37,5 @@ create table "public"."bookingRequests" (
   "startTime"     text    not null,
   "endTime"       text    not null,
   "status"        text    not null,
-  primary key ("bookingId"),
-  index ("swimmerId"),
-  index ("poolId")
+  primary key ("bookingId")
 );
