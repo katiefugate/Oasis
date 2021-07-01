@@ -14,6 +14,7 @@ import SignUp from './pages/sign-up';
 import SignIn from './pages/sign-in';
 import decodeToken from './lib/decode-token';
 import HostPools from './pages/host-pools';
+import HostPoolInfo from './pages/host-pool-info';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -124,45 +125,45 @@ export default class App extends React.Component {
     if (path === 'host-form') {
       return (
         <>
-      < HostHeader onSignOut={this.handleSignOut}/>
-      < HostForm hostId={this.state.hostId} />
-      < HostNavbar />
-      </>
+          < HostHeader onSignOut={this.handleSignOut}/>
+          < HostForm hostId={this.state.hostId} />
+          < HostNavbar />
+        </>
       );
     }
     if (path === 'search') {
       return (
-      <>
-      < SwimmerHeader onSignOut={this.handleSignOut} />
-      < SwimmerSearch />
-      < SwimmerNavbar />
-      </>
+        <>
+          < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerSearch />
+          < SwimmerNavbar />
+        </>
       );
     }
     if (path === 'search-results') {
       return (
         <>
-        < SwimmerHeader onSignOut={this.handleSignOut} />
-        < SwimmerSearchResults location={location} />
-        < SwimmerNavbar />
+          < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerSearchResults location={location} />
+          < SwimmerNavbar />
         </>
       );
     }
     if (path === 'pool') {
       return (
         <>
-        < SwimmerHeader onSignOut={this.handleSignOut}/>
-        < SwimmerPoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
-        < SwimmerNavbar />
+          < SwimmerHeader onSignOut={this.handleSignOut}/>
+          < SwimmerPoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
+          < SwimmerNavbar />
         </>
       );
     }
     if (path === 'host-bookings') {
       return (
         <>
-        < HostHeader onSignOut={this.handleSignOut}/>
-        < HostBookingRequests hostId={this.state.hostId} />
-        < HostNavbar />
+          < HostHeader onSignOut={this.handleSignOut}/>
+          < HostBookingRequests hostId={this.state.hostId} />
+          < HostNavbar />
         </>
       );
     }
@@ -171,6 +172,15 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} />
           < HostPools hostId={this.state.hostId}/>
+          < HostNavbar />
+        </>
+      );
+    }
+    if (path === 'host-pool') {
+      return (
+        <>
+          < HostHeader onSignOut={this.handleSignOut} />
+          < HostPoolInfo poolId={poolId} />
           < HostNavbar />
         </>
       );
