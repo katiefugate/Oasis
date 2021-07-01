@@ -26,10 +26,10 @@ class HostPools extends React.Component {
   renderPoolList() {
     const poolList = this.state.poolList.map(pool => {
       return (
-        <div className='list-pool' key={pool.poolId}>
+        <a href={`#host-pool?poolId=${pool.poolId}`} className='list-pool' key={pool.poolId}>
           <img id={pool.poolId} className='pool-list-img' src={pool.image}></img>
           <div className='host-pool-location'>{pool.location}</div>
-        </div>
+        </a>
       );
     });
     return poolList;

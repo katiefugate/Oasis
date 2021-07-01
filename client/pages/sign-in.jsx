@@ -39,7 +39,7 @@ class SignIn extends React.Component {
         } else if (type === 'swimmer') {
           window.location.hash = '#search';
         } else if (type === 'host') {
-          window.location.hash = '#host-form';
+          window.location.hash = '#host-pools';
         }
       });
   }
