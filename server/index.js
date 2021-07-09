@@ -239,6 +239,53 @@ app.get('/api/host/pools/:hostId', (req, res, next) => {
     });
 });
 
+app.put('/api/edit-pool/:poolId/:ifImage', uploadsMiddleware, (req, res, next) => {
+  const ifImage = req.params.ifImage;
+  const poolId = parseInt(req.params.poolId, 10);
+  const location = req.body.location;
+  const price = parseInt(req.body.price, 10);
+  const description = req.body.description;
+  const rules = req.body.rules;
+  const amenities = req.body.amenities;
+  let url = null;
+  if (!ifImage) {
+    url = req.file.location;
+  }
+  if (!Number.isInteger(poolId) || Math.sign(poolId) !== 1) {
+    throw new ClientError(400, 'poolId must be a positive integer!');
+  }
+
+  let sql = `
+  update "pools"
+  set "location" = $1,
+      "price" = $2,
+      "description" = $3,
+      "rules" = $4,
+      "amenities" = $5,
+      "image" = $6
+  where "poolId" = $7
+  returning*`;
+  let params = [location, price, description, rules, amenities, url, poolId];
+  if (ifImage) {
+    sql = `
+  update "pools"
+  set "location" = $1,
+      "price" = $2,
+      "description" = $3,
+      "rules" = $4,
+      "amenities" = $5
+  where "poolId" = $6
+  returning*`;
+    params = [location, price, description, rules, amenities, poolId];
+  }
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

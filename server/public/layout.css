@@ -287,6 +287,10 @@ form {
   margin-left: 1rem;
 }
 
+.pool-info-edit {
+  align-self: center;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;

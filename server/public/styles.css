@@ -244,6 +244,12 @@ button {
   text-decoration: none;
 }
 
+.pool-info-edit {
+  color: rgba(43, 103, 129, 1);
+  font-size: 1.5rem;
+  padding-top: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover {
