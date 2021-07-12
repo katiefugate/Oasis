@@ -291,6 +291,12 @@ form {
   align-self: center;
 }
 
+.edit-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;

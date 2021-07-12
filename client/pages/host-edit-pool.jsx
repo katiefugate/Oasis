@@ -89,9 +89,9 @@ class EditPool extends React.Component {
             <label className='image-label' htmlFor='image'>Image</label>
             <input className='fileInput' onChange={this.handleChange} type='file' name='image'></input>
           </div>
-          <div className='button-container'>
-            <button className='host-submit-button' type='submit'>SUBMIT</button>
-            <button onClick={this.handleClick} className='host-cancel-button' type='button'>CANCEL</button>
+          <div className='edit-button-container'>
+            <button className='edit-submit-button' type='submit'>SUBMIT</button>
+            <button onClick={this.handleClick} className='edit-cancel-button' type='button'>CANCEL</button>
           </div>
         </form>
       </div>
