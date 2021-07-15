@@ -473,4 +473,14 @@ form {
   .my-pools-link {
     margin-left: 1.5rem;
   }
+
+  .edit-button-container {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .edit-submit-button,
+  .edit-cancel-button {
+    margin: 0 4rem;
+  }
 }

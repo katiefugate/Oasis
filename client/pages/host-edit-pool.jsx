@@ -54,13 +54,15 @@ const EditPool = props => {
       method: 'PUT',
       body: formInputs
     };
-    fetch(`/api/edit-pool/${props.poolId}/${ifImage}`, init);
-    window.location.hash = `#host-pool?poolId=${props.poolId}`;
+    fetch(`/api/edit-pool/${props.poolId}/${ifImage}`, init)
+      .then(response => {
+        window.location.hash = `#host-pool?poolId=${props.poolId}`;
+      });
   };
 
   return (
       <div className='host-form-container'>
-        <h1 className='host-form-title'>Add your pool!</h1>
+        <h1 className='host-form-title'>Edit your pool!</h1>
         <form onSubmit={handleSubmit}>
           <div className='row'>
             <div className='column'>

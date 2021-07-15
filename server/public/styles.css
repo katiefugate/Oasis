@@ -213,6 +213,7 @@ textarea {
 .search-icon:hover,
 .search-button:hover,
 .pool-list-img:hover,
+.pool-info-edit,
 button {
   cursor: pointer;
 }
@@ -262,7 +263,8 @@ button {
 
 @media screen and (min-width: 768px) {
   button:hover,
-  a:hover {
+  a:hover,
+  .pool-info-edit:hover {
     transform: scale(1.1);
   }
 }
