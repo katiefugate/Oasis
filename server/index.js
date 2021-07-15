@@ -248,7 +248,7 @@ app.put('/api/edit-pool/:poolId/:ifImage', uploadsMiddleware, (req, res, next) =
   const rules = req.body.rules;
   const amenities = req.body.amenities;
   let url = null;
-  if (ifImage) {
+  if (ifImage === 'true') {
     url = req.file.location;
   }
   if (!Number.isInteger(poolId) || Math.sign(poolId) !== 1) {
@@ -265,7 +265,7 @@ app.put('/api/edit-pool/:poolId/:ifImage', uploadsMiddleware, (req, res, next) =
   where "poolId" = $7
   returning*`;
   let params = [location, price, description, rules, amenities, url, poolId];
-  if (!ifImage) {
+  if (ifImage === 'false') {
     sql = `
   update "pools"
   set "location" = $1,
