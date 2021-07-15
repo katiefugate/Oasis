@@ -15,6 +15,7 @@ import SignIn from './pages/sign-in';
 import decodeToken from './lib/decode-token';
 import HostPools from './pages/host-pools';
 import HostPoolInfo from './pages/host-pool-info';
+import EditPool from './pages/host-edit-pool';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -183,6 +184,15 @@ export default class App extends React.Component {
           < HostPoolInfo poolId={poolId} />
           < HostNavbar />
         </>
+      );
+    }
+    if (path === 'edit-pool') {
+      return (
+        <>
+          < HostHeader onSignOut={this.handleSignOut} />
+          < EditPool poolId={poolId} />
+          < HostNavbar />
+          </>
       );
     }
   }

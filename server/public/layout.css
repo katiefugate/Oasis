@@ -287,6 +287,16 @@ form {
   margin-left: 1rem;
 }
 
+.pool-info-edit {
+  align-self: center;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
@@ -462,5 +472,15 @@ form {
 
   .my-pools-link {
     margin-left: 1.5rem;
+  }
+
+  .edit-button-container {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .edit-submit-button,
+  .edit-cancel-button {
+    margin: 0 4rem;
   }
 }

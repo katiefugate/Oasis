@@ -3,6 +3,7 @@ import React from 'react';
 class HostPoolInfo extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       info: null,
       isLoading: true
@@ -20,6 +21,10 @@ class HostPoolInfo extends React.Component {
       });
   }
 
+  handleClick(event) {
+    window.location.hash = `#edit-pool?poolId=${this.props.poolId}`;
+  }
+
   render() {
     return this.state.isLoading
       ? <p>Loading...</p>
@@ -28,6 +33,7 @@ class HostPoolInfo extends React.Component {
             <div className='info-col'>
               <div className='location-book-container'>
                 <span className='pool-info-location'>{this.state.info.location}</span>
+                <i onClick={this.handleClick} className="fas fa-edit pool-info-edit"></i>
               </div>
               <img className='pool-info-img' src={this.state.info.image}></img>
               <div className='pool-info-span'>

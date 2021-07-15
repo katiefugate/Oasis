@@ -197,12 +197,23 @@ textarea {
   width: 7rem;
 }
 
+.edit-submit-button,
+.edit-cancel-button {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  border-radius: 0.5rem;
+  width: 8rem;
+  padding: 0.5rem 0;
+  font-size: 1.25rem;
+}
+
 .host-submit-button:hover,
 .search-link:hover,
 .host-button:hover,
 .search-icon:hover,
 .search-button:hover,
 .pool-list-img:hover,
+.pool-info-edit,
 button {
   cursor: pointer;
 }
@@ -244,9 +255,16 @@ button {
   text-decoration: none;
 }
 
+.pool-info-edit {
+  color: rgba(43, 103, 129, 1);
+  font-size: 1.5rem;
+  padding-top: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
-  a:hover {
+  a:hover,
+  .pool-info-edit:hover {
     transform: scale(1.1);
   }
 }
