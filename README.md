@@ -5,19 +5,21 @@ A full-stack JavaScript web application for renting someones pool, or listing yo
 [LIVE](https://swim-oasis.herokuapp.com/)
 
 ## Features
-1. Host can add a pool
-2. Swimmer can seach for pools by location
+1. Host can add a pool.
+2. Swimmer can seach for pools by location.
 3. Swimmer can view the details of a pool.
 4. Swimmer can send a booking request to a host.
 5. Host can view a list of pending booking requests.
 6. Host can accept or decline a booking request.
+7. Host can view a list of their pools.
+8. Host can view the details of their pool.
+9. Host can edit their pool.
 
 ## Planned Additions
 1. Swimmer can view a list of their sent booking requests.
-2. Host can view their pool.
-3. Host can edit their pool.
-4. Swimmer can view a list of completed swims.
-5. Swimmer can leave a rating on a completed swims.
+2. Swimmer can view a list of upcoming booked swims.
+3. Swimmer can view a list of completed swims.
+4. Swimmer can leave a rating on a completed swim.
 
 
 &nbsp;  
