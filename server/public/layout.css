@@ -470,7 +470,8 @@ form {
     margin-bottom: 0;
   }
 
-  .my-pools-link {
+  .my-pools-link,
+  .booking-requests-link.swimmer {
     margin-left: 1.5rem;
   }
 

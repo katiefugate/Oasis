@@ -123,7 +123,8 @@ textarea {
 
 .search-icon,
 .host-bookings-icon,
-.host-pools-icon {
+.host-pools-icon,
+.swimmer-bookings-icon {
   color: white;
   font-size: 4rem;
   margin: 0.75rem 0;
