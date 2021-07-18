@@ -295,6 +295,7 @@ app.get('/api/swimmer/booking-requests/:swimmerId', (req, res, next) => {
          "startTime",
          "endTime",
          "status",
+         "bookingId",
  "pools"."location",
  "pools"."price",
  "pools"."image"
