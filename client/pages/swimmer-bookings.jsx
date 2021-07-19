@@ -25,7 +25,9 @@ function SwimmerBookings(props) {
       const end = endD.substring(11);
       return (
         <div key={booking.bookingId}>
-          <img src={booking.image} id={booking.poolId} className='pool-list-img'></img>
+          <a href={`#pool?poolId=${booking.poolId}`}>
+            <img src={booking.image} id={booking.poolId} className='pool-list-img'></img>
+          </a>
           <div className='pool-list-info'>
             <span className='pool-list-location'>{booking.location}</span>
             <span className='pool-list-price'>{`$${booking.price}/hr`}</span>
