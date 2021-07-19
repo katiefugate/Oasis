@@ -284,6 +284,34 @@ app.put('/api/edit-pool/:poolId/:ifImage', uploadsMiddleware, (req, res, next) =
     .catch(err => next(err));
 });
 
+app.get('/api/swimmer/booking-requests/:swimmerId', (req, res, next) => {
+  const swimmerId = parseInt(req.params.swimmerId, 10);
+  if (!Number.isInteger(swimmerId) || Math.sign(swimmerId) !== 1) {
+    throw new ClientError(400, 'swimmerId must be a positive integer!');
+  }
+  const sql = `
+  select "poolId",
+         "date",
+         "startTime",
+         "endTime",
+         "status",
+         "bookingId",
+ "pools"."location",
+ "pools"."price",
+ "pools"."image"
+  from "bookingRequests"
+  join "pools" using ("poolId")
+  where "swimmerId" = $1
+  order by "bookingId" desc`;
+  const params = [swimmerId];
+
+  db.query(sql, params)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

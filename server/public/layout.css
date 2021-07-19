@@ -297,6 +297,16 @@ form {
   margin: 2rem 0;
 }
 
+.booking-info {
+  margin-top: 1rem;
+}
+
+.booking-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
@@ -470,7 +480,8 @@ form {
     margin-bottom: 0;
   }
 
-  .my-pools-link {
+  .my-pools-link,
+  .booking-requests-link.swimmer {
     margin-left: 1.5rem;
   }
 
@@ -482,5 +493,10 @@ form {
   .edit-submit-button,
   .edit-cancel-button {
     margin: 0 4rem;
+  }
+
+  .list-booking {
+    flex-basis: calc(100% / 3);
+    padding: 0 0.75rem;
   }
 }
