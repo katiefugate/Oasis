@@ -301,7 +301,8 @@ app.get('/api/swimmer/booking-requests/:swimmerId', (req, res, next) => {
  "pools"."image"
   from "bookingRequests"
   join "pools" using ("poolId")
-  where "swimmerId" = $1`;
+  where "swimmerId" = $1
+  order by "bookingId" desc`;
   const params = [swimmerId];
 
   db.query(sql, params)
