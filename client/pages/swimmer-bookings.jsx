@@ -20,6 +20,9 @@ function SwimmerBookings(props) {
   }, []);
 
   function handleClick(event) {
+    if (!event.target.id) {
+      return;
+    }
     setTab(event.target.id);
     if (event.target.id === 'pending') {
       setPendingActive('active');
