@@ -29,7 +29,8 @@ label,
 .booking-container,
 .home-description,
 .home-or,
-.home-host {
+.home-host,
+.booking-info {
   font-family: 'Short Stack', cursive;
 }
 
@@ -272,7 +273,8 @@ button {
   button:hover,
   a:hover,
   .pool-info-edit:hover,
-  .booking-tab:hover {
+  .booking-tab:hover,
+  .pool-list-img:hover {
     transform: scale(1.1);
   }
 }

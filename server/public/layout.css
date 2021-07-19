@@ -494,4 +494,9 @@ form {
   .edit-cancel-button {
     margin: 0 4rem;
   }
+
+  .list-booking {
+    flex-basis: calc(100% / 3);
+    padding: 0 0.75rem;
+  }
 }

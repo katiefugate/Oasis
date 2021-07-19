@@ -49,7 +49,7 @@ function SwimmerBookings(props) {
       const end = endD.substring(11);
       if (booking.status === tab) {
         return (
-          <div key={booking.bookingId}>
+          <div key={booking.bookingId} className='list-booking'>
             <a href={`#pool?poolId=${booking.poolId}`}>
               <img src={booking.image} id={booking.poolId} className='pool-list-img'></img>
             </a>
@@ -74,15 +74,17 @@ function SwimmerBookings(props) {
   return isLoading
     ? <p>Loading...</p>
     : (
-      <div className='pool-list-container'>
+      <>
         <h1 className='booking-title'>Booking Requests</h1>
         <div onClick={handleClick} className='booking-tabs'>
           <span className={`booking-tab ${pendingActive}`} id='pending'>Pending</span>
           <span className={`booking-tab ${acceptedActive}`} id='accepted'>Accepted</span>
           <span className={`booking-tab ${declinedActive}`} id='declined'>Declined</span>
         </div>
+        <div className='pool-list-container'>
         {renderBookings()}
-      </div>
+        </div>
+      </>
       );
 }
 
