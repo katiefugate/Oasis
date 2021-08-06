@@ -307,6 +307,12 @@ form {
   margin-top: 1rem;
 }
 
+.cancel-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;

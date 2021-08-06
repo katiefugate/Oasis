@@ -41,6 +41,17 @@ function SwimmerBookings(props) {
     }
   }
 
+  function cancelClick(event) {
+    const init = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: 'cancelled' })
+    };
+    fetch(`/api/host/booking-status/${event.target.id}`, init);
+  }
+
   function renderBookings() {
     const bookingsList = bookings.map(booking => {
       const re = /-/g;
@@ -50,6 +61,12 @@ function SwimmerBookings(props) {
       const date = format(new Date(newDate), 'MM/dd/yyyy');
       const start = startD.substring(11);
       const end = endD.substring(11);
+      let cancelButton;
+      if (booking.status === 'accepted' || booking.status === 'pending') {
+        cancelButton = <button id={booking.bookingId} onClick={cancelClick} className='cancel-button'>CANCEL</button>;
+      } else {
+        cancelButton = null;
+      }
       if (booking.status === tab) {
         return (
           <div key={booking.bookingId} className='list-booking'>
@@ -65,6 +82,10 @@ function SwimmerBookings(props) {
             <span className='booking-info'>{`${start} to ${end}`}</span>
             </div>
             <div className='booking-info'>Status: {booking.status}</div>
+            <div className='cancel-button-container'>
+            {cancelButton}
+            </div>
+            <div className='line'></div>
           </div>
         );
       } else {

@@ -269,6 +269,21 @@ button {
   color: rgba(43, 103, 129, 1);
 }
 
+.cancel-button {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  padding: 0.5rem 10rem;
+  border-radius: 0.5rem;
+  align-self: center;
+}
+
+.line {
+  position: relative;
+  background-color: rgba(43, 103, 129, 1);
+  padding-bottom: 0.05rem;
+  margin-top: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover,
