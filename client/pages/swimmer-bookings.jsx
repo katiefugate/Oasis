@@ -9,6 +9,7 @@ function SwimmerBookings(props) {
   const [acceptedActive, setAcceptedActive] = useState('active');
   const [pendingActive, setPendingActive] = useState('inactive');
   const [declinedActive, setDeclinedActive] = useState('inactive');
+  const [cancelledActive, setCancelledActive] = useState('inactive');
 
   useEffect(() => {
     fetch(`/api/swimmer/booking-requests/${props.swimmerId}`)
@@ -28,17 +29,37 @@ function SwimmerBookings(props) {
       setPendingActive('active');
       setAcceptedActive('inactive');
       setDeclinedActive('inactive');
+      setCancelledActive('inacitve');
     }
     if (event.target.id === 'accepted') {
       setPendingActive('inactive');
       setAcceptedActive('active');
       setDeclinedActive('inactive');
+      setCancelledActive('inacitve');
     }
     if (event.target.id === 'declined') {
       setPendingActive('inactive');
       setAcceptedActive('inactive');
       setDeclinedActive('active');
+      setCancelledActive('inacitve');
     }
+    if (event.target.id === 'cancelled') {
+      setPendingActive('inactive');
+      setAcceptedActive('inactive');
+      setDeclinedActive('inactive');
+      setCancelledActive('active');
+    }
+  }
+
+  function cancelClick(event) {
+    const init = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: 'cancelled' })
+    };
+    fetch(`/api/host/booking-status/${event.target.id}`, init);
   }
 
   function renderBookings() {
@@ -50,6 +71,12 @@ function SwimmerBookings(props) {
       const date = format(new Date(newDate), 'MM/dd/yyyy');
       const start = startD.substring(11);
       const end = endD.substring(11);
+      let cancelButton;
+      if (booking.status === 'accepted' || booking.status === 'pending') {
+        cancelButton = <button id={booking.bookingId} onClick={cancelClick} className='cancel-button'>CANCEL</button>;
+      } else {
+        cancelButton = null;
+      }
       if (booking.status === tab) {
         return (
           <div key={booking.bookingId} className='list-booking'>
@@ -65,6 +92,10 @@ function SwimmerBookings(props) {
             <span className='booking-info'>{`${start} to ${end}`}</span>
             </div>
             <div className='booking-info'>Status: {booking.status}</div>
+            <div className='cancel-button-container'>
+            {cancelButton}
+            </div>
+            <div className='line'></div>
           </div>
         );
       } else {
@@ -83,6 +114,7 @@ function SwimmerBookings(props) {
           <span className={`booking-tab ${pendingActive}`} id='pending'>Pending</span>
           <span className={`booking-tab ${acceptedActive}`} id='accepted'>Accepted</span>
           <span className={`booking-tab ${declinedActive}`} id='declined'>Declined</span>
+          <span className={`booking-tab ${cancelledActive}`} id='cancelled'>Cancelled</span>
         </div>
         <div className='pool-list-container'>
         {renderBookings()}
