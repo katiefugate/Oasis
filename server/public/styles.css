@@ -292,4 +292,8 @@ button {
   .pool-list-img:hover {
     transform: scale(1.1);
   }
+
+  .line {
+    display: none;
+  }
 }
