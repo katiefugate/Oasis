@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { format } from 'date-fns';
+import { format, isBefore, parseISO } from 'date-fns';
 
 function SwimmerBookings(props) {
 
@@ -10,6 +10,7 @@ function SwimmerBookings(props) {
   const [pendingActive, setPendingActive] = useState('inactive');
   const [declinedActive, setDeclinedActive] = useState('inactive');
   const [cancelledActive, setCancelledActive] = useState('inactive');
+  const [completedActive, setCompletedActive] = useState('completed');
 
   useEffect(() => {
     fetch(`/api/swimmer/booking-requests/${props.swimmerId}`)
@@ -49,6 +50,13 @@ function SwimmerBookings(props) {
       setDeclinedActive('inactive');
       setCancelledActive('active');
     }
+    if (event.target.id === 'completed') {
+      setCompletedActive('active');
+      setPendingActive('inactive');
+      setAcceptedActive('inactive');
+      setDeclinedActive('inactive');
+      setCancelledActive('inactive');
+    }
   }
 
   function cancelClick(event) {
@@ -72,8 +80,25 @@ function SwimmerBookings(props) {
       const start = startD.substring(11);
       const end = endD.substring(11);
       let cancelButton;
+      const today = new Date();
+      const bookingDate = parseISO(booking.date);
+      if (isBefore(bookingDate, today) && booking.status === 'accepted') {
+        const init = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status: 'completed' })
+        };
+        fetch(`/api/host/booking-status/${parseInt(booking.bookingId, 10)}`, init)
+          .then(response => {
+            booking.status = 'completed';
+          });
+      }
       if (booking.status === 'accepted' || booking.status === 'pending') {
         cancelButton = <button id={booking.bookingId} onClick={cancelClick} className='cancel-button'>CANCEL</button>;
+      } else if (isBefore(bookingDate, today)) {
+        cancelButton = null;
       } else {
         cancelButton = null;
       }
@@ -115,6 +140,7 @@ function SwimmerBookings(props) {
           <span className={`booking-tab ${acceptedActive}`} id='accepted'>Accepted</span>
           <span className={`booking-tab ${declinedActive}`} id='declined'>Declined</span>
           <span className={`booking-tab ${cancelledActive}`} id='cancelled'>Cancelled</span>
+          <span className={`booking-tab ${completedActive}`} id ='completed'>Completed</span>
         </div>
         <div className='pool-list-container'>
         {renderBookings()}
