@@ -127,6 +127,10 @@ function SwimmerBookings(props) {
         return null;
       }
     });
+    const newList = bookingsList.filter(booking => booking !== null);
+    if (newList.length === 0) {
+      return <h1 className='no-bookings'>{`You have no ${tab} requests.`}</h1>;
+    }
     return bookingsList;
   }
 

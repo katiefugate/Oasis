@@ -305,6 +305,7 @@ form {
   display: flex;
   justify-content: space-evenly;
   margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .cancel-button-container {
