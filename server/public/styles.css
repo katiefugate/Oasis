@@ -284,6 +284,24 @@ button {
   margin-top: 2rem;
 }
 
+.available {
+  display: none;
+}
+
+.unavailable {
+  color: red;
+  text-align: center;
+}
+
+.close-button {
+  background-color: rgba(43, 103, 129, 1);
+  color: white;
+  height: 2rem;
+  align-self: center;
+  border-radius: 0.5rem;
+  margin-left: 3rem;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover,

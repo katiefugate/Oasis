@@ -1,3 +1,5 @@
+import { isSameDay } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 import React from 'react';
 
 class SwimmerPoolInfo extends React.Component {
@@ -6,11 +8,16 @@ class SwimmerPoolInfo extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.closeButton = this.closeButton.bind(this);
     this.state = {
       isLoading: true,
       info: null,
       modalClass: 'hidden',
-      overlayClass: 'hidden'
+      overlayClass: 'hidden',
+      sameTime: false,
+      available: 'available',
+      confirmationModal: 'hidden',
+      confirmationOverlay: 'hidden'
     };
   }
 
@@ -38,21 +45,49 @@ class SwimmerPoolInfo extends React.Component {
     const poolId = this.props.poolId;
     const swimmerId = this.props.swimmerId;
     const name = this.props.name;
-    const init = {
-      method: 'POST',
-      body: JSON.stringify({ swimmerId, poolId, name, date, startTime, endTime }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
 
-    };
-    fetch('/api/book', init)
-      .then(response => response.json());
-    this.setState({ modalClass: 'hidden', overlayClass: 'hidden' });
+    fetch(`/api/bookings/pool/${poolId}`)
+      .then(response => response.json())
+      .then(body => {
+        const requestedDate = parseISO(date);
+        const sameDay = body.filter(booking => isSameDay(requestedDate, parseISO(booking.date)));
+        const splitStart = startTime.split(':');
+        const splitEnd = endTime.split(':');
+        this.setState({ sameTime: false });
+        for (let i = 0; i < sameDay.length; i++) {
+          const splitStartEach = sameDay[i].startTime.split(':');
+          const splitEndEach = sameDay[i].endTime.split(':');
+          if (splitStart >= splitStartEach && splitStart <= splitEndEach) {
+            this.setState({ sameTime: true });
+          } else if (splitEnd <= splitEndEach && splitEnd >= splitStartEach) {
+            this.setState({ sameTime: true });
+          }
+        }
+        if (this.state.sameTime) {
+          this.setState({ available: 'unavailable' });
+        } else {
+          const init = {
+            method: 'POST',
+            body: JSON.stringify({ swimmerId, poolId, name, date, startTime, endTime }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+
+          };
+          fetch('/api/book', init)
+            .then(response => response.json());
+          this.setState({ modalClass: 'hidden', overlayClass: 'hidden' });
+          this.setState({ confirmationModal: 'modal', confirmationOverlay: 'overlay' });
+        }
+      });
   }
 
   handleCancel() {
     this.setState({ modalClass: 'hidden', overlayClass: 'hidden' });
+  }
+
+  closeButton() {
+    this.setState({ confirmationModal: 'hidden', confirmationOverlay: 'hidden' });
   }
 
   render() {
@@ -61,8 +96,14 @@ class SwimmerPoolInfo extends React.Component {
       ? <p>Loading...</p>
       : (
         <div className='pool-info-container'>
+          <div className={this.state.confirmationOverlay}></div>
+          <div className={this.state.confirmationModal}>
+            <h1>Request sent!</h1>
+            <button className='close-button' onClick={this.closeButton}>close</button>
+          </div>
           <div className={this.state.overlayClass}></div>
           <div className={this.state.modalClass}>
+            <div className={this.state.available}>That time is unavailable, please try another.</div>
             <form className='booking-form' onSubmit={this.handleSubmit}>
               <label htmlFor='date'>Date</label>
               <input className='booking-input' type='date' name='date'></input>
