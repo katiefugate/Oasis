@@ -77,7 +77,8 @@ class SwimmerPoolInfo extends React.Component {
           fetch('/api/book', init)
             .then(response => response.json());
           this.setState({ modalClass: 'hidden', overlayClass: 'hidden' });
-          this.setState({ confirmationModal: 'modal', confirmationOverlay: 'overlay' });
+          this.setState({ confirmationModal: 'modal', confirmationOverlay: 'overlay', available: 'available' });
+          event.target.reset();
         }
       });
   }

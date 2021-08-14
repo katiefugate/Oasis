@@ -21,7 +21,8 @@ label,
 .host-pools-header,
 .host-pool-location,
 .my-pools-link,
-.booking-tabs {
+.booking-tabs,
+.unavailable {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -299,7 +300,6 @@ button {
   height: 2rem;
   align-self: center;
   border-radius: 0.5rem;
-  margin-left: 3rem;
 }
 
 @media screen and (min-width: 768px) {
