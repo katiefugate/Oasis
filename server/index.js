@@ -312,6 +312,27 @@ app.get('/api/swimmer/booking-requests/:swimmerId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/bookings/pool/:poolId', (req, res, next) => {
+  const poolId = parseInt(req.params.poolId, 10);
+  if (!Number.isInteger(poolId) || Math.sign(poolId) !== 1) {
+    throw new ClientError(400, 'poolId must be a positive integer');
+  }
+  const sql = `
+  select "date",
+         "startTime",
+         "endTime",
+         "status"
+         "poolId"
+  from "bookingRequests"
+  where "poolId" = $1 AND "status" = 'accepted'`;
+  const params = [poolId];
+
+  db.query(sql, params)
+    .then(result =>
+      res.status(200).json(result.rows))
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
