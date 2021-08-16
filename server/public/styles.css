@@ -50,7 +50,7 @@ label,
 .header,
 .header-sign-in,
 .header-sign-up {
-  background-color: rgba(43, 103, 129, 0.87);
+  background-color: rgb(70, 127, 151);
   box-shadow: 0 0 6px 5px rgba(43, 103, 129, 1);
 }
 
@@ -125,7 +125,7 @@ textarea {
 }
 
 .navbar {
-  background-color: rgba(43, 103, 129, 1);
+  background-color: rgb(70, 127, 151);
   position: fixed;
   width: 100%;
   bottom: 0;
