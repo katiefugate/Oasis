@@ -40,7 +40,7 @@ label,
 .header-sign-up,
 .header-sign-in {
   background-color: rgba(43, 103, 129);
-  padding: 0.5px;
+  padding: 0.05px;
   text-align: center;
   color: white;
   font-family: 'Voltaire', sans-serif;
@@ -136,7 +136,7 @@ textarea {
 .host-pools-icon,
 .swimmer-bookings-icon {
   color: white;
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 0.75rem 0;
   margin-left: 1rem;
 }
@@ -310,6 +310,14 @@ button {
   border-radius: 0.5rem;
 }
 
+button:hover {
+  background-color: rgb(70, 127, 151);
+}
+
+.sign-out-button:hover {
+  background-color: slategrey;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover,
@@ -317,6 +325,10 @@ button {
   .booking-tab:hover,
   .pool-list-img:hover {
     transform: scale(1.1);
+  }
+
+  button:hover {
+    background-color: rgb(70, 127, 151);
   }
 
   .line {
