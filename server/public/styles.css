@@ -39,12 +39,19 @@ label,
 .header-home,
 .header-sign-up,
 .header-sign-in {
-  background-color: rgba(43, 103, 129, 1);
+  background-color: rgba(43, 103, 129);
   padding: 0.5px;
   text-align: center;
   color: white;
   font-family: 'Voltaire', sans-serif;
   font-size: 1.25rem;
+}
+
+.header,
+.header-sign-in,
+.header-sign-up {
+  background-color: rgba(43, 103, 129, 0.87);
+  box-shadow: 0 0 6px 5px rgba(43, 103, 129, 1);
 }
 
 .host-form-title,
@@ -229,6 +236,7 @@ button {
 
 .home-button {
   font-size: 1.25em;
+  background-color: silver;
 }
 
 .invalid {
