@@ -274,6 +274,10 @@ button {
   padding-top: 1rem;
 }
 
+.booking-tab:hover {
+  color: slategrey;
+}
+
 .booking-tab.active {
   color: rgba(43, 103, 129, 1);
 }
@@ -318,13 +322,19 @@ button:hover {
   background-color: slategrey;
 }
 
+.my-pools-link:hover,
+.booking-requests-link:hover,
+.search-link:hover {
+  color: rgb(162, 185, 207);
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover,
   .pool-info-edit:hover,
   .booking-tab:hover,
   .pool-list-img:hover {
-    transform: scale(1.1);
+    transform: scale(1.03);
   }
 
   button:hover {
