@@ -39,12 +39,19 @@ label,
 .header-home,
 .header-sign-up,
 .header-sign-in {
-  background-color: rgba(43, 103, 129, 1);
-  padding: 0.5px;
+  background-color: rgba(43, 103, 129);
+  padding: 0.05px;
   text-align: center;
   color: white;
   font-family: 'Voltaire', sans-serif;
   font-size: 1.25rem;
+}
+
+.header,
+.header-sign-in,
+.header-sign-up {
+  background-color: rgb(70, 127, 151);
+  box-shadow: 0 0 6px 5px rgba(43, 103, 129, 1);
 }
 
 .host-form-title,
@@ -118,7 +125,7 @@ textarea {
 }
 
 .navbar {
-  background-color: rgba(43, 103, 129, 1);
+  background-color: rgb(70, 127, 151);
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -129,7 +136,7 @@ textarea {
 .host-pools-icon,
 .swimmer-bookings-icon {
   color: white;
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 0.75rem 0;
   margin-left: 1rem;
 }
@@ -229,6 +236,7 @@ button {
 
 .home-button {
   font-size: 1.25em;
+  background-color: silver;
 }
 
 .invalid {
@@ -264,6 +272,10 @@ button {
   color: rgba(43, 103, 129, 1);
   font-size: 1.5rem;
   padding-top: 1rem;
+}
+
+.booking-tab:hover {
+  color: slategrey;
 }
 
 .booking-tab.active {
@@ -302,13 +314,39 @@ button {
   border-radius: 0.5rem;
 }
 
+button:hover {
+  background-color: rgb(70, 127, 151);
+}
+
+.sign-out-button:hover {
+  background-color: slategrey;
+}
+
+.my-pools-link:hover,
+.booking-requests-link:hover,
+.search-link:hover {
+  color: rgb(162, 185, 207);
+}
+
+.decline-button:hover {
+  background-color: grey;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover,
   .pool-info-edit:hover,
   .booking-tab:hover,
   .pool-list-img:hover {
-    transform: scale(1.1);
+    transform: scale(1.03);
+  }
+
+  button:hover {
+    background-color: rgb(70, 127, 151);
+  }
+
+  .decline-button:hover {
+    background-color: rgb(78, 77, 77);
   }
 
   .line {
