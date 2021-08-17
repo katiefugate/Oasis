@@ -328,6 +328,10 @@ button:hover {
   color: rgb(162, 185, 207);
 }
 
+.decline-button:hover {
+  background-color: grey;
+}
+
 @media screen and (min-width: 768px) {
   button:hover,
   a:hover,
@@ -339,6 +343,10 @@ button:hover {
 
   button:hover {
     background-color: rgb(70, 127, 151);
+  }
+
+  .decline-button:hover {
+    background-color: rgb(78, 77, 77);
   }
 
   .line {
