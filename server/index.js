@@ -186,10 +186,14 @@ app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
          "bookingRequests"."date",
          "bookingRequests"."startTime",
          "bookingRequests"."endTime",
-         "bookingRequests"."bookingId"
+         "bookingRequests"."bookingId",
+         "bookingRequests"."poolId",
+         "pools"."image",
+         "pools"."location"
     from "bookingRequests"
     join "users" on "users"."userId" = "bookingRequests"."swimmerId"
-   where "hostId" = $1 AND "status" = 'pending'`;
+    join "pools" on "pools"."poolId" = "bookingRequests"."poolId"
+   where "bookingRequests"."hostId" = $1 AND "status" = 'pending'`;
   const params = [hostId];
 
   db.query(sql, params)
