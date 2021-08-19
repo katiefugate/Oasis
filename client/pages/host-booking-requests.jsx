@@ -40,7 +40,12 @@ class HostBookingRequests extends React.Component {
       }
     };
     fetch(`/api/host/booking-status/${bookingId}`, init)
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(body => {
+        const copy = this.state.bookings.filter(booking => booking);
+        const newBookings = copy.filter(booking => booking.bookingId !== body.bookingId);
+        this.setState({ bookings: newBookings });
+      });
   }
 
   renderBookings() {
