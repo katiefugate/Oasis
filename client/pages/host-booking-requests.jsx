@@ -55,13 +55,17 @@ class HostBookingRequests extends React.Component {
       return (
         <div id={booking.bookingId} className='booking-container' key={booking.bookingId}>
           <div className='column-half'>
-          <p className='booking-info'>{booking.name}</p>
-          <p className='booking-info'>{date}</p>
-          <p className='booking-info'>{start} to {end}</p>
+            <h3 className='booking-location'>{booking.location}</h3>
+            <img className='booking-img' src={booking.image}></img>
+            <p className='booking-info'>{booking.name}</p>
+            <div className='date-time'>
+              <p className='booking-info'>{date}</p>
+              <p className='booking-info'>{start} to {end}</p>
+            </div>
           </div>
           <div className='column-half booking-request-buttons'>
-          <button onClick={this.handleClick} className='accept-button'>Accept</button>
-          <button onClick={this.handleClick} className='decline-button'>Decline</button>
+            <button onClick={this.handleClick} className='accept-button'>Accept</button>
+            <button onClick={this.handleClick} className='decline-button'>Decline</button>
           </div>
         </div>
       );

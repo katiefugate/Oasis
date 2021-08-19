@@ -22,7 +22,8 @@ label,
 .host-pool-location,
 .my-pools-link,
 .booking-tabs,
-.unavailable {
+.unavailable,
+.booking-location {
   font-family: 'Montserrat', sans-serif;
 }
 
