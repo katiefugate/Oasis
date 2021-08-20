@@ -40,7 +40,12 @@ class HostBookingRequests extends React.Component {
       }
     };
     fetch(`/api/host/booking-status/${bookingId}`, init)
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(body => {
+        const copy = this.state.bookings.filter(booking => booking);
+        const newBookings = copy.filter(booking => booking.bookingId !== body.bookingId);
+        this.setState({ bookings: newBookings });
+      });
   }
 
   renderBookings() {
@@ -55,13 +60,17 @@ class HostBookingRequests extends React.Component {
       return (
         <div id={booking.bookingId} className='booking-container' key={booking.bookingId}>
           <div className='column-half'>
-          <p className='booking-info'>{booking.name}</p>
-          <p className='booking-info'>{date}</p>
-          <p className='booking-info'>{start} to {end}</p>
+            <h3 className='booking-location'>{booking.location}</h3>
+            <img className='booking-img' src={booking.image}></img>
+            <div className='name-date'>
+              <p className='booking-info'>{booking.name}</p>
+              <p className='booking-info'>{date}</p>
+            </div>
+            <p className='booking-info'>{start} to {end}</p>
           </div>
           <div className='column-half booking-request-buttons'>
-          <button onClick={this.handleClick} className='accept-button'>Accept</button>
-          <button onClick={this.handleClick} className='decline-button'>Decline</button>
+            <button onClick={this.handleClick} className='accept-button'>Accept</button>
+            <button onClick={this.handleClick} className='decline-button'>Decline</button>
           </div>
         </div>
       );
