@@ -62,11 +62,11 @@ class HostBookingRequests extends React.Component {
           <div className='column-half'>
             <h3 className='booking-location'>{booking.location}</h3>
             <img className='booking-img' src={booking.image}></img>
-            <p className='booking-info'>{booking.name}</p>
-            <div className='date-time'>
+            <div className='name-date'>
+              <p className='booking-info'>{booking.name}</p>
               <p className='booking-info'>{date}</p>
-              <p className='booking-info'>{start} to {end}</p>
             </div>
+            <p className='booking-info'>{start} to {end}</p>
           </div>
           <div className='column-half booking-request-buttons'>
             <button onClick={this.handleClick} className='accept-button'>Accept</button>

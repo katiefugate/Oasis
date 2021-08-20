@@ -320,7 +320,7 @@ form {
   border-radius: 0.5rem;
 }
 
-.date-time {
+.name-date {
   display: flex;
   justify-content: space-between;
 }
