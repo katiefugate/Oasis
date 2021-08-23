@@ -23,7 +23,8 @@ label,
 .my-pools-link,
 .booking-tabs,
 .unavailable,
-.booking-location {
+.booking-location,
+.upcoming-link {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -135,7 +136,8 @@ textarea {
 .search-icon,
 .host-bookings-icon,
 .host-pools-icon,
-.swimmer-bookings-icon {
+.swimmer-bookings-icon,
+.host-booked-icon {
   color: white;
   font-size: 3rem;
   margin: 0.75rem 0;
@@ -153,7 +155,8 @@ textarea {
 }
 
 .search-link,
-.booking-requests-link {
+.booking-requests-link,
+.upcoming-link {
   text-decoration: none;
   color: white;
 }
@@ -227,7 +230,8 @@ textarea {
 .pool-list-img:hover,
 .pool-info-edit,
 .booking-tabs,
-button {
+button,
+.upcoming-link:hover {
   cursor: pointer;
 }
 
@@ -325,7 +329,8 @@ button:hover {
 
 .my-pools-link:hover,
 .booking-requests-link:hover,
-.search-link:hover {
+.search-link:hover,
+.upcoming-link:hover {
   color: rgb(162, 185, 207);
 }
 
