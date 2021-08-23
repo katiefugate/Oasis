@@ -17,6 +17,7 @@ import HostPools from './pages/host-pools';
 import HostPoolInfo from './pages/host-pool-info';
 import EditPool from './pages/host-edit-pool';
 import SwimmerBookings from './pages/swimmer-bookings';
+import UpcomingBookings from './pages/host-upcoming-bookings';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -202,6 +203,15 @@ export default class App extends React.Component {
         < SwimmerHeader onSignOut={this.handleSignOut} />
         < SwimmerBookings swimmerId={this.state.swimmerId} />
         < SwimmerNavbar />
+        </>
+      );
+    }
+    if (path === 'host-upcoming') {
+      return (
+        <>
+        < HostHeader onSignOut={this.handleSignOut} />
+        < UpcomingBookings hostId={this.state.hostId} />
+        < HostNavbar />
         </>
       );
     }

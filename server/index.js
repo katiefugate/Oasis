@@ -349,11 +349,15 @@ app.get('/api/host/upcoming-bookings/:hostId', (req, res, next) => {
          "endTime",
          "status",
          "poolId",
+         "bookingId",
   "pools"."image",
-  "pools"."location"
+  "pools"."location",
+  "users"."name"
   from "bookingRequests"
   join "pools" using ("poolId")
-  where "bookingRequests"."hostId" = $1 AND "status" = 'accepted'`;
+  join "users" on "users"."userId" = "bookingRequests"."swimmerId"
+  where "bookingRequests"."hostId" = $1 AND "status" = 'accepted'
+  order by "date"`;
   const params = [hostId];
   db.query(sql, params)
     .then(result => res.status(200).json(result.rows))

@@ -18,7 +18,7 @@ class HostHeader extends React.Component {
         <span className='desktop-links'>
           <a className='booking-requests-link' href='#host-bookings'>Booking Requests</a>
           <a className='my-pools-link' href='#host-pools'>My Pools</a>
-          <a className='upcoming-link'>Upcoming Bookings</a>
+          <a className='upcoming-link' href='#host-upcoming'>Upcoming Bookings</a>
         </span>
       </div>
     );
