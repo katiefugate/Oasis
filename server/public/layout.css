@@ -501,7 +501,8 @@ form {
   }
 
   .my-pools-link,
-  .booking-requests-link.swimmer {
+  .booking-requests-link.swimmer,
+  .upcoming-link {
     margin-left: 1.5rem;
   }
 

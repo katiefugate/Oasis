@@ -337,6 +337,33 @@ app.get('/api/bookings/pool/:poolId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/host/upcoming-bookings/:hostId', (req, res, next) => {
+  const hostId = parseInt(req.params.hostId, 10);
+  if (!Number.isInteger(hostId) || Math.sign(hostId) !== 1) {
+    throw new ClientError(400, 'hostId must be a positive integer');
+  }
+
+  const sql = `
+  select "date",
+         "startTime",
+         "endTime",
+         "status",
+         "poolId",
+         "bookingId",
+  "pools"."image",
+  "pools"."location",
+  "users"."name"
+  from "bookingRequests"
+  join "pools" using ("poolId")
+  join "users" on "users"."userId" = "bookingRequests"."swimmerId"
+  where "bookingRequests"."hostId" = $1 AND "status" = 'accepted'
+  order by "date"`;
+  const params = [hostId];
+  db.query(sql, params)
+    .then(result => res.status(200).json(result.rows))
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
