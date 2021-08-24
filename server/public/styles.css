@@ -334,7 +334,8 @@ button:hover {
   color: rgb(162, 185, 207);
 }
 
-.decline-button:hover {
+.decline-button:hover,
+.booking-cancel:hover {
   background-color: grey;
 }
 
