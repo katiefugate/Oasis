@@ -15,6 +15,9 @@ class HostForm extends React.Component {
     };
     fetch(`/api/pools/${this.props.hostId}`, init)
       .then(res => res.json())
+      .then(body => {
+        window.location.hash = '#host-pools';
+      })
       .catch(err => console.error(err));
 
     event.target.reset();
