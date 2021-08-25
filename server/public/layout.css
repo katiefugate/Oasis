@@ -325,6 +325,16 @@ form {
   justify-content: space-between;
 }
 
+.booking-a {
+  position: relative;
+}
+
+.notification {
+  position: absolute;
+  left: 3rem;
+  top: 0.5rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
