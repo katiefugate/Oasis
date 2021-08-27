@@ -25,13 +25,15 @@ export default class App extends React.Component {
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.bookingIsRead = this.bookingIsRead.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
       type: null,
       swimmerId: null,
       hostId: null,
       isAuthorizing: true,
-      invalid: 'hidden'
+      invalid: 'hidden',
+      isRead: true
     };
   }
 
@@ -111,6 +113,10 @@ export default class App extends React.Component {
     window.location.hash = '#';
   }
 
+  bookingIsRead(read) {
+    this.setState({ isRead: read });
+  }
+
   renderPage() {
     const { path } = this.state.route;
     const { params } = this.state.route;
@@ -130,7 +136,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut}/>
           < HostForm hostId={this.state.hostId} />
-          < HostNavbar />
+          < HostNavbar isRead={this.state.isRead} />
         </>
       );
     }
@@ -166,7 +172,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut}/>
           < HostBookingRequests hostId={this.state.hostId} />
-          < HostNavbar />
+          < HostNavbar isRead={this.state.isRead} />
         </>
       );
     }
@@ -175,7 +181,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} />
           < HostPools hostId={this.state.hostId}/>
-          < HostNavbar />
+          < HostNavbar isRead={this.state.isRead} />
         </>
       );
     }
@@ -184,7 +190,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} />
           < HostPoolInfo poolId={poolId} />
-          < HostNavbar />
+          < HostNavbar isRead={this.state.isRead} />
         </>
       );
     }
@@ -193,7 +199,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} />
           < EditPool poolId={poolId} />
-          < HostNavbar />
+          < HostNavbar isRead={this.state.isRead} />
           </>
       );
     }
@@ -211,7 +217,7 @@ export default class App extends React.Component {
         <>
         < HostHeader onSignOut={this.handleSignOut} />
         < UpcomingBookings hostId={this.state.hostId} />
-        < HostNavbar />
+        < HostNavbar isRead={this.state.isRead} />
         </>
       );
     }

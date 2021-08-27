@@ -37,5 +37,6 @@ create table "public"."bookingRequests" (
   "startTime"     text    not null,
   "endTime"       text    not null,
   "status"        text    not null,
+  "viewed"        text    not null,
   primary key ("bookingId")
 );

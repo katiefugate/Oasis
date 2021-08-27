@@ -167,8 +167,8 @@ app.post('/api/book', (req, res, next) => {
       const hostId = result.rows[0].hostId;
       const params2 = [swimmerId, poolId, hostId, date, startTime, endTime];
       const sql2 = `
-      insert into "bookingRequests"("swimmerId", "poolId", "hostId", "date", "startTime", "endTime", "status")
-                            values ($1, $2, $3, $4, $5, $6, 'pending')
+      insert into "bookingRequests"("swimmerId", "poolId", "hostId", "date", "startTime", "endTime", "status", "viewed")
+                            values ($1, $2, $3, $4, $5, $6, 'pending', 'false')
       returning *`;
       db.query(sql2, params2)
         .then(result => {
