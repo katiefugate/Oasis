@@ -10,7 +10,7 @@ class HostNavbar extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.isRead) {
+    if (!this.state.read) {
       this.setState({ isRead: 'notification' });
     }
   }

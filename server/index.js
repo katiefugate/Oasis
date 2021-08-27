@@ -195,10 +195,17 @@ app.get('/api/host/booking-requests/:hostId', (req, res, next) => {
     join "pools" on "pools"."poolId" = "bookingRequests"."poolId"
    where "bookingRequests"."hostId" = $1 AND "status" = 'pending'`;
   const params = [hostId];
-
-  db.query(sql, params)
+  const sql2 = `
+    update "bookingRequests"
+    set "viewed" = 'true'
+    where "hostId" = $1`;
+  db.query(sql2, params)
     .then(result => {
-      res.status(200).json(result.rows);
+      db.query(sql, params)
+        .then(result => {
+          res.status(200).json(result.rows);
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
@@ -362,6 +369,20 @@ app.get('/api/host/upcoming-bookings/:hostId', (req, res, next) => {
   db.query(sql, params)
     .then(result => res.status(200).json(result.rows))
     .catch(err => next(err));
+});
+
+app.get('/api/host-unread/:hostId', (req, res, next) => {
+  const hostId = parseInt(req.params.hostId, 10);
+  if (!Number.isInteger(hostId) || Math.sign(hostId) !== 1) {
+    throw new ClientError(400, 'hostId must be a positive integer');
+  }
+  const sql = `
+  select "viewed"
+  from "bookingRequests"
+  where "hostId" = $1 AND "viewed" = 'false'`;
+  const params = [hostId];
+  db.query(sql, params)
+    .then(result => res.status(200).json(result.rows));
 });
 
 app.use(errorMiddleware);

@@ -32,8 +32,7 @@ export default class App extends React.Component {
       swimmerId: null,
       hostId: null,
       isAuthorizing: true,
-      invalid: 'hidden',
-      isRead: true
+      invalid: 'hidden'
     };
   }
 
@@ -48,6 +47,25 @@ export default class App extends React.Component {
     if (!user) {
       window.location.hash = '#';
       this.setState({ isAuthorizing: false });
+    }
+    if (user.type === 'host') {
+      fetch(`/api/host-unread/${user.userId}`)
+        .then(response => response.json())
+        .then(body => {
+          if (body.length !== 0) {
+            this.setState({ isRead: false });
+          } else {
+            this.setState({ isRead: true });
+          }
+        })
+        .then(done => {
+          this.setState({
+            type: 'host',
+            swimmerId: null,
+            hostId: user.userId,
+            isAuthorizing: false
+          });
+        });
     } else if (user.type === 'swimmer') {
       this.setState({
         type: 'swimmer',
@@ -55,15 +73,27 @@ export default class App extends React.Component {
         hostId: null,
         isAuthorizing: false
       });
-    } else {
-      this.setState({
-        type: 'host',
-        swimmerId: null,
-        hostId: user.userId,
-        isAuthorizing: false
-      });
     }
+    //  else {
+    //   this.setState({
+    //     type: 'host',
+    //     swimmerId: null,
+    //     hostId: user.userId,
+    //     isAuthorizing: false
+    //   });
   }
+  // if (user.type === 'host') {
+  //   fetch(`/api/host-unread/${user.userId}`)
+  //     .then(response => response.json())
+  //     .then(body => {
+  //       if (body.length !== 0) {
+  //         this.setState({ isRead: false });
+  //       } else {
+  //         this.setState({ isRead: true });
+  //       }
+  //     })
+  //     .then(done => {});
+  // }
 
   handleSignUp(type, id) {
     if (type === 'swimmer') {
@@ -171,7 +201,7 @@ export default class App extends React.Component {
       return (
         <>
           < HostHeader onSignOut={this.handleSignOut}/>
-          < HostBookingRequests hostId={this.state.hostId} />
+          < HostBookingRequests hostId={this.state.hostId} isRead={this.bookingIsRead} />
           < HostNavbar isRead={this.state.isRead} />
         </>
       );
