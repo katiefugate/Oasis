@@ -74,26 +74,7 @@ export default class App extends React.Component {
         isAuthorizing: false
       });
     }
-    //  else {
-    //   this.setState({
-    //     type: 'host',
-    //     swimmerId: null,
-    //     hostId: user.userId,
-    //     isAuthorizing: false
-    //   });
   }
-  // if (user.type === 'host') {
-  //   fetch(`/api/host-unread/${user.userId}`)
-  //     .then(response => response.json())
-  //     .then(body => {
-  //       if (body.length !== 0) {
-  //         this.setState({ isRead: false });
-  //       } else {
-  //         this.setState({ isRead: true });
-  //       }
-  //     })
-  //     .then(done => {});
-  // }
 
   handleSignUp(type, id) {
     if (type === 'swimmer') {
