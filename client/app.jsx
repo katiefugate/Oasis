@@ -47,8 +47,7 @@ export default class App extends React.Component {
     if (!user) {
       window.location.hash = '#';
       this.setState({ isAuthorizing: false });
-    }
-    if (user.type === 'host') {
+    } else if (user.type === 'host') {
       fetch(`/api/host-unread/${user.userId}`)
         .then(response => response.json())
         .then(body => {
