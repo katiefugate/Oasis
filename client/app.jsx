@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from './pages/home';
 import SwimmerHeader from './components/swimmer-header';
 import HostHeader from './components/host-header';
 import HostForm from './pages/host-form';
@@ -133,7 +132,7 @@ export default class App extends React.Component {
     const location = params.get('location');
     const poolId = params.get('poolId');
     if (path === '') {
-      return < Home />;
+      return < SignIn onSignIn={this.handleSignIn} invalid={this.state.invalid} />;
     }
     if (path === 'sign-up') {
       return < SignUp onSignUp={this.handleSignUp} />;

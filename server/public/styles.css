@@ -33,7 +33,8 @@ label,
 .home-description,
 .home-or,
 .home-host,
-.booking-info {
+.booking-info,
+.sign {
   font-family: 'Short Stack', cursive;
 }
 
@@ -249,13 +250,6 @@ button {
   font-size: 2rem;
 }
 
-.home-description,
-.home-or,
-.home-host {
-  background-color: rgba(43, 103, 129, 1);
-  color: white;
-}
-
 .no-type {
   color: red;
   font-size: 1.5rem;
@@ -341,6 +335,18 @@ button:hover {
 
 .notification {
   color: red;
+}
+
+.sign {
+  font-size: 1.15rem;
+}
+
+.sign-link:link {
+  color: rgba(43, 103, 129, 1);
+}
+
+.sign-link:visited {
+  color: rgb(28, 67, 83);
 }
 
 @media screen and (min-width: 768px) {

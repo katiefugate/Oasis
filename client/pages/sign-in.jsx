@@ -55,6 +55,9 @@ class SignIn extends React.Component {
         <div className='header-sign-in'>
           <h1 className='header-name'>OASIS</h1>
         </div>
+        <div className='home-description'>Get away to your own private oasis. Rent a pool by the hour.</div>
+        <p className='home-or'>OR</p>
+        <div className='home-host'>Become a host and turn your splash into cash!</div>
         <div className={this.props.invalid}>Invalid Login!</div>
         <form onSubmit={this.handleSubmit} className='sign-in-form'>
           <h1 className='auth-header'>Sign in to continue</h1>
@@ -75,6 +78,7 @@ class SignIn extends React.Component {
           </div>
           <button className='sign-in-button' type='submit'>Sign in!</button>
         </form>
+        <div className='sign'>Don&apos;t have an account? <a className='sign-link' href='#sign-up'>Sign up!</a></div>
       </div>
     );
   }

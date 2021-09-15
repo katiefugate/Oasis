@@ -34,6 +34,9 @@ class SignUp extends React.Component {
         <div className='header-sign-up'>
           <h1 className='header-name'>OASIS</h1>
         </div>
+        <div className='home-description'>Get away to your own private oasis. Rent a pool by the hour.</div>
+        <p className='home-or'>OR</p>
+        <div className='home-host'>Become a host and turn your splash into cash!</div>
         <form onSubmit={this.handleSubmit} className='sign-up-form'>
           <h1 className='auth-header'>Create an account to get started!</h1>
           <div className='radio-container'>
@@ -56,6 +59,7 @@ class SignUp extends React.Component {
           </div>
           <button className='sign-up-button' type='submit'>Sign Up</button>
         </form>
+        <div className='sign'>Already have an account? <a className='sign-link' href='#sign-in'>Sign in!</a></div>
       </div>
     );
   }
