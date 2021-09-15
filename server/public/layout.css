@@ -335,6 +335,11 @@ form {
   top: 0.5rem;
 }
 
+.sign {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     flex-flow: row wrap;
