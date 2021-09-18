@@ -24,7 +24,9 @@ label,
 .booking-tabs,
 .unavailable,
 .booking-location,
-.upcoming-link {
+.upcoming-link,
+.toggle-swimmer,
+.toggle-host {
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -250,13 +252,6 @@ button {
   font-size: 2rem;
 }
 
-.no-type {
-  color: red;
-  font-size: 1.5rem;
-  margin-top: 0;
-  text-align: center;
-}
-
 .add-pool-button {
   padding: 0.5rem 1rem;
   margin-top: 1rem;
@@ -357,6 +352,12 @@ button:hover {
   border-radius: 0.5rem;
   position: relative;
   align-self: center;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.15rem;
 }
 
 .toggle-host {
