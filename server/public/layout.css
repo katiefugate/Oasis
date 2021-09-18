@@ -343,6 +343,7 @@ form {
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .header-title {
@@ -425,7 +426,6 @@ form {
 
   .header {
     display: flex;
-    justify-content: space-between;
   }
 
   .desktop-links {
@@ -548,5 +548,12 @@ form {
   .list-booking {
     flex-basis: calc(100% / 3);
     padding: 0 0.75rem;
+  }
+
+  .link-toggle-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2rem;
   }
 }

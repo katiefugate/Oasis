@@ -25,6 +25,7 @@ export default class App extends React.Component {
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
     this.bookingIsRead = this.bookingIsRead.bind(this);
+    this.switchType = this.switchType.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
       type: null,
@@ -126,6 +127,28 @@ export default class App extends React.Component {
     this.setState({ isRead: read });
   }
 
+  switchType(type) {
+    let userId;
+    if (type === 'swimmer') {
+      userId = this.state.hostId;
+      this.setState({
+        type: 'swimmer',
+        swimmerId: userId,
+        hostId: null
+      });
+      window.location.hash = '#search';
+    } else {
+      userId = this.state.swimmerId;
+      this.setState({
+        type: 'host',
+        swimmerId: null,
+        hostId: userId
+      });
+      window.location.hash = '#host-pools';
+    }
+
+  }
+
   renderPage() {
     const { path } = this.state.route;
     const { params } = this.state.route;
@@ -143,7 +166,7 @@ export default class App extends React.Component {
     if (path === 'host-form') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut}/>
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType}/>
           < HostForm hostId={this.state.hostId} />
           < HostNavbar isRead={this.state.isRead} />
         </>
@@ -152,7 +175,7 @@ export default class App extends React.Component {
     if (path === 'search') {
       return (
         <>
-          < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < SwimmerSearch />
           < SwimmerNavbar />
         </>
@@ -161,7 +184,7 @@ export default class App extends React.Component {
     if (path === 'search-results') {
       return (
         <>
-          < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < SwimmerSearchResults location={location} />
           < SwimmerNavbar />
         </>
@@ -170,7 +193,7 @@ export default class App extends React.Component {
     if (path === 'pool') {
       return (
         <>
-          < SwimmerHeader onSignOut={this.handleSignOut}/>
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < SwimmerPoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
           < SwimmerNavbar />
         </>
@@ -179,7 +202,7 @@ export default class App extends React.Component {
     if (path === 'host-bookings') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut}/>
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostBookingRequests hostId={this.state.hostId} isRead={this.bookingIsRead} />
           < HostNavbar isRead={this.state.isRead} />
         </>
@@ -188,7 +211,7 @@ export default class App extends React.Component {
     if (path === 'host-pools') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostPools hostId={this.state.hostId}/>
           < HostNavbar isRead={this.state.isRead} />
         </>
@@ -197,7 +220,7 @@ export default class App extends React.Component {
     if (path === 'host-pool') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostPoolInfo poolId={poolId} />
           < HostNavbar isRead={this.state.isRead} />
         </>
@@ -206,7 +229,7 @@ export default class App extends React.Component {
     if (path === 'edit-pool') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < EditPool poolId={poolId} />
           < HostNavbar isRead={this.state.isRead} />
           </>
@@ -215,7 +238,7 @@ export default class App extends React.Component {
     if (path === 'swimmer-bookings') {
       return (
         <>
-        < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
         < SwimmerBookings swimmerId={this.state.swimmerId} />
         < SwimmerNavbar />
         </>
@@ -224,7 +247,7 @@ export default class App extends React.Component {
     if (path === 'host-upcoming') {
       return (
         <>
-        < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
         < UpcomingBookings hostId={this.state.hostId} />
         < HostNavbar isRead={this.state.isRead} />
         </>
