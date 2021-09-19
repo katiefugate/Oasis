@@ -22,7 +22,7 @@ class HostBookingRequests extends React.Component {
           isLoading: false
         });
       });
-    this.props.isRead(true);
+    // this.props.isRead(true);
   }
 
   handleClick(event) {

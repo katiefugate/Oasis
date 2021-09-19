@@ -197,13 +197,6 @@ form {
   margin-bottom: 5.35rem;
 }
 
-.radio-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 3rem;
-}
-
 #host {
   margin-left: 5rem;
 }
@@ -327,12 +320,6 @@ form {
 
 .booking-a {
   position: relative;
-}
-
-.notification {
-  position: absolute;
-  left: 3rem;
-  top: 0.5rem;
 }
 
 .sign {

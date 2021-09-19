@@ -21,10 +21,8 @@ import UpcomingBookings from './pages/host-upcoming-bookings';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
-    this.bookingIsRead = this.bookingIsRead.bind(this);
     this.switchType = this.switchType.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
@@ -48,43 +46,18 @@ export default class App extends React.Component {
       window.location.hash = '#';
       this.setState({ isAuthorizing: false });
     } else if (user.type === 'host') {
-      fetch(`/api/host-unread/${user.userId}`)
-        .then(response => response.json())
-        .then(body => {
-          if (body.length !== 0) {
-            this.setState({ isRead: false });
-          } else {
-            this.setState({ isRead: true });
-          }
-        })
-        .then(done => {
-          this.setState({
-            type: 'host',
-            swimmerId: null,
-            hostId: user.userId,
-            isAuthorizing: false
-          });
-        });
+      this.setState({
+        type: 'host',
+        swimmerId: null,
+        hostId: user.userId,
+        isAuthorizing: false
+      });
     } else if (user.type === 'swimmer') {
       this.setState({
         type: 'swimmer',
         swimmerId: user.userId,
         hostId: null,
         isAuthorizing: false
-      });
-    }
-  }
-
-  handleSignUp(type, id) {
-    if (type === 'swimmer') {
-      this.setState({
-        swimmerId: id,
-        hostId: null
-      });
-    } else {
-      this.setState({
-        swimmerId: null,
-        hostId: id
       });
     }
   }
@@ -121,10 +94,6 @@ export default class App extends React.Component {
       hostId: null
     });
     window.location.hash = '#';
-  }
-
-  bookingIsRead(read) {
-    this.setState({ isRead: read });
   }
 
   switchType(type) {
