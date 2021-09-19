@@ -197,13 +197,6 @@ form {
   margin-bottom: 5.35rem;
 }
 
-.radio-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 3rem;
-}
-
 #host {
   margin-left: 5rem;
 }
@@ -329,15 +322,24 @@ form {
   position: relative;
 }
 
-.notification {
-  position: absolute;
-  left: 3rem;
-  top: 0.5rem;
-}
-
 .sign {
   text-align: center;
   margin-bottom: 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  padding-left: 8rem;
+}
+
+.toggle-host,
+.toggle-swimmer {
+  margin-right: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -411,7 +413,6 @@ form {
 
   .header {
     display: flex;
-    justify-content: space-between;
   }
 
   .desktop-links {
@@ -421,7 +422,7 @@ form {
   }
 
   .header-title {
-    padding: 0 8rem;
+    padding-left: 8rem;
   }
 
   .pool-info-container {
@@ -534,5 +535,12 @@ form {
   .list-booking {
     flex-basis: calc(100% / 3);
     padding: 0 0.75rem;
+  }
+
+  .link-toggle-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2rem;
   }
 }

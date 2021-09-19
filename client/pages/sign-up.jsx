@@ -9,10 +9,8 @@ class SignUp extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const name = event.target.name.value;
-    const username = event.target.name.value;
+    const username = event.target.username.value;
     const password = event.target.password.value;
-    const type = event.target.user.value;
-
     const init = {
       method: 'POST',
       body: JSON.stringify({ name, username, password }),
@@ -20,11 +18,7 @@ class SignUp extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/sign-up', init)
-      .then(response => response.json())
-      .then(body => {
-        this.props.onSignUp(type, body.userId);
-      });
+    fetch('/api/sign-up', init);
     window.location.hash = '#sign-in';
   }
 
@@ -39,12 +33,6 @@ class SignUp extends React.Component {
         <div className='home-host'>Become a host and turn your splash into cash!</div>
         <form onSubmit={this.handleSubmit} className='sign-up-form'>
           <h1 className='auth-header'>Create an account to get started!</h1>
-          <div className='radio-container'>
-            <input type='radio' name='user' id='swimmer' value='swimmer'></input>
-            <label htmlFor='swimmer'>Swimmer</label>
-            <input type='radio' name='user' id='host' value='host'></input>
-            <label htmlFor="host">Host</label>
-          </div>
           <div className='input-container'>
             <label className='sign-up-label' htmlFor='name'>Name</label>
             <input className='sign-up-input' type='name' name='name'></input>

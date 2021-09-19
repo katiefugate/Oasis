@@ -21,10 +21,9 @@ import UpcomingBookings from './pages/host-upcoming-bookings';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
-    this.bookingIsRead = this.bookingIsRead.bind(this);
+    this.switchType = this.switchType.bind(this);
     this.state = {
       route: parseRoute(window.location.hash),
       type: null,
@@ -47,43 +46,18 @@ export default class App extends React.Component {
       window.location.hash = '#';
       this.setState({ isAuthorizing: false });
     } else if (user.type === 'host') {
-      fetch(`/api/host-unread/${user.userId}`)
-        .then(response => response.json())
-        .then(body => {
-          if (body.length !== 0) {
-            this.setState({ isRead: false });
-          } else {
-            this.setState({ isRead: true });
-          }
-        })
-        .then(done => {
-          this.setState({
-            type: 'host',
-            swimmerId: null,
-            hostId: user.userId,
-            isAuthorizing: false
-          });
-        });
+      this.setState({
+        type: 'host',
+        swimmerId: null,
+        hostId: user.userId,
+        isAuthorizing: false
+      });
     } else if (user.type === 'swimmer') {
       this.setState({
         type: 'swimmer',
         swimmerId: user.userId,
         hostId: null,
         isAuthorizing: false
-      });
-    }
-  }
-
-  handleSignUp(type, id) {
-    if (type === 'swimmer') {
-      this.setState({
-        swimmerId: id,
-        hostId: null
-      });
-    } else {
-      this.setState({
-        swimmerId: null,
-        hostId: id
       });
     }
   }
@@ -122,8 +96,26 @@ export default class App extends React.Component {
     window.location.hash = '#';
   }
 
-  bookingIsRead(read) {
-    this.setState({ isRead: read });
+  switchType(type) {
+    let userId;
+    if (type === 'swimmer') {
+      userId = this.state.hostId;
+      this.setState({
+        type: 'swimmer',
+        swimmerId: userId,
+        hostId: null
+      });
+      window.location.hash = '#search';
+    } else {
+      userId = this.state.swimmerId;
+      this.setState({
+        type: 'host',
+        swimmerId: null,
+        hostId: userId
+      });
+      window.location.hash = '#host-pools';
+    }
+
   }
 
   renderPage() {
@@ -143,16 +135,16 @@ export default class App extends React.Component {
     if (path === 'host-form') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut}/>
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType}/>
           < HostForm hostId={this.state.hostId} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
         </>
       );
     }
     if (path === 'search') {
       return (
         <>
-          < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < SwimmerSearch />
           < SwimmerNavbar />
         </>
@@ -161,7 +153,7 @@ export default class App extends React.Component {
     if (path === 'search-results') {
       return (
         <>
-          < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < SwimmerSearchResults location={location} />
           < SwimmerNavbar />
         </>
@@ -170,7 +162,7 @@ export default class App extends React.Component {
     if (path === 'pool') {
       return (
         <>
-          < SwimmerHeader onSignOut={this.handleSignOut}/>
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < SwimmerPoolInfo poolId={poolId} swimmerId={this.state.swimmerId} name={this.state.name}/>
           < SwimmerNavbar />
         </>
@@ -179,43 +171,43 @@ export default class App extends React.Component {
     if (path === 'host-bookings') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut}/>
-          < HostBookingRequests hostId={this.state.hostId} isRead={this.bookingIsRead} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
+          < HostBookingRequests hostId={this.state.hostId} />
+          < HostNavbar />
         </>
       );
     }
     if (path === 'host-pools') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostPools hostId={this.state.hostId}/>
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
         </>
       );
     }
     if (path === 'host-pool') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostPoolInfo poolId={poolId} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
         </>
       );
     }
     if (path === 'edit-pool') {
       return (
         <>
-          < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < EditPool poolId={poolId} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
           </>
       );
     }
     if (path === 'swimmer-bookings') {
       return (
         <>
-        < SwimmerHeader onSignOut={this.handleSignOut} />
+          < SwimmerHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
         < SwimmerBookings swimmerId={this.state.swimmerId} />
         < SwimmerNavbar />
         </>
@@ -224,9 +216,9 @@ export default class App extends React.Component {
     if (path === 'host-upcoming') {
       return (
         <>
-        < HostHeader onSignOut={this.handleSignOut} />
+          < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
         < UpcomingBookings hostId={this.state.hostId} />
-        < HostNavbar isRead={this.state.isRead} />
+        < HostNavbar />
         </>
       );
     }

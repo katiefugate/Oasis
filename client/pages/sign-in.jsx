@@ -5,10 +5,11 @@ class SignIn extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleHandler = this.toggleHandler.bind(this);
     this.state = {
       username: 'demo',
       password: 'mickeymouse',
-      noType: 'hidden'
+      type: 'swimmer'
     };
   }
 
@@ -17,11 +18,6 @@ class SignIn extends React.Component {
     const username = event.target.username.value;
     const password = event.target.password.value;
     const type = event.target.user.value;
-    if (!type) {
-      this.setState({ noType: 'no-type' });
-    } else {
-      this.setState({ noType: 'hidden' });
-    }
     const init = {
       method: 'POST',
       body: JSON.stringify({ username, password, type }),
@@ -49,6 +45,14 @@ class SignIn extends React.Component {
     this.setState({ [name]: value });
   }
 
+  toggleHandler() {
+    if (this.state.type === 'swimmer') {
+      this.setState({ type: 'host' });
+    } else {
+      this.setState({ type: 'swimmer' });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -61,13 +65,11 @@ class SignIn extends React.Component {
         <div className={this.props.invalid}>Invalid Login!</div>
         <form onSubmit={this.handleSubmit} className='sign-in-form'>
           <h1 className='auth-header'>Sign in to continue</h1>
-          <p className={this.state.noType}>Please pick an account type!</p>
-          <div className='radio-container'>
-            <input type='radio' name='user' id='swimmer' value='swimmer'></input>
-            <label htmlFor='swimmer'>Swimmer</label>
-            <input type='radio' name='user' id='host' value='host'></input>
-            <label htmlFor="host">Host</label>
-          </div>
+          <p className={`toggle-${this.state.type}`} onClick={this.toggleHandler}>
+            {this.state.type}
+            <span className={`circle ${this.state.type}`} onClick={this.toggleHandler}></span>
+          </p>
+          <input type='hidden' name='user' value={this.state.type} />
           <div className='input-container'>
             <label className='sign-in-label' htmlFor='username'>Username</label>
             <input onChange={this.handleChange} className='sign-in-input' type='username' name='username' value={this.state.username}></input>
