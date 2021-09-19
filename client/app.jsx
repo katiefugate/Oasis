@@ -137,7 +137,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType}/>
           < HostForm hostId={this.state.hostId} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
         </>
       );
     }
@@ -172,8 +172,8 @@ export default class App extends React.Component {
       return (
         <>
           < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
-          < HostBookingRequests hostId={this.state.hostId} isRead={this.bookingIsRead} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostBookingRequests hostId={this.state.hostId} />
+          < HostNavbar />
         </>
       );
     }
@@ -182,7 +182,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostPools hostId={this.state.hostId}/>
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
         </>
       );
     }
@@ -191,7 +191,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < HostPoolInfo poolId={poolId} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
         </>
       );
     }
@@ -200,7 +200,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
           < EditPool poolId={poolId} />
-          < HostNavbar isRead={this.state.isRead} />
+          < HostNavbar />
           </>
       );
     }
@@ -218,7 +218,7 @@ export default class App extends React.Component {
         <>
           < HostHeader onSignOut={this.handleSignOut} switchType={this.switchType} />
         < UpcomingBookings hostId={this.state.hostId} />
-        < HostNavbar isRead={this.state.isRead} />
+        < HostNavbar />
         </>
       );
     }
